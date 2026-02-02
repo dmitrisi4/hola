@@ -1,4 +1,5 @@
 import { Link } from '@tanstack/react-router'
+
 import styles from './TopBar.module.css'
 
 export function TopBar({ title }: { title?: string }) {

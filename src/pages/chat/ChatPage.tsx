@@ -1,6 +1,8 @@
 import { AppShell } from '@/app/layout/AppShell'
-import { MessageBubble } from '@/widgets/chat/MessageBubble'
+
 import styles from './ChatPage.module.css'
+
+import { MessageBubble } from '@/widgets/chat/MessageBubble'
 
 export function ChatPage() {
   return (

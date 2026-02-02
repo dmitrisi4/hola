@@ -1,4 +1,5 @@
 import { ProfilePreview } from "@/entities/profile/ui/ProfilePreview";
+
 import styles from "./SwipeDeck.module.css";
 
 export function SwipeDeck() {

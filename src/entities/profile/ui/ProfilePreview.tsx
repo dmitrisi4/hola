@@ -1,5 +1,6 @@
-import type { Profile } from '../model/types'
 import styles from './ProfilePreview.module.css'
+
+import type { Profile } from '../model/types'
 
 export function ProfilePreview({ profile }: { profile: Profile }) {
   return (

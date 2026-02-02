@@ -1,9 +1,11 @@
 import { useRouter } from '@tanstack/react-router'
 import { useState } from 'react'
+
 import { Button } from '@/shared/ui/atoms/button/Button'
 import { Input } from '@/shared/ui/atoms/input/Input'
-import { useLogin } from '../model/useLogin'
+
 import styles from './LoginForm.module.css'
+import { useLogin } from '../model/useLogin'
 
 export function LoginForm() {
   const router = useRouter()

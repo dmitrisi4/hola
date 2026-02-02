@@ -1,5 +1,7 @@
 import { Link } from '@tanstack/react-router';
+
 import { LoginForm } from '@/features/auth/login/ui/LoginForm';
+
 import styles from './LoginPage.module.css';
 
 export function LoginPage() {

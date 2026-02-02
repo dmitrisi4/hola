@@ -1,6 +1,8 @@
 import { useState } from 'react'
+
 import { Button } from '@/shared/ui/atoms/button/Button'
 import { Input } from '@/shared/ui/atoms/input/Input'
+
 import styles from './EditProfileForm.module.css'
 
 export function EditProfileForm() {

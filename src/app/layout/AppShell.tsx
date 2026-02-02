@@ -1,6 +1,6 @@
-import { TopBar } from './TopBar'
-import { BottomNav } from './BottomNav'
 import styles from './AppShell.module.css'
+import { BottomNav } from './BottomNav'
+import { TopBar } from './TopBar'
 
 export function AppShell({
   title,

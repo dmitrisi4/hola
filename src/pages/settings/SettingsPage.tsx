@@ -1,4 +1,5 @@
 import { AppShell } from '@/app/layout/AppShell'
+
 import styles from './SettingsPage.module.css'
 
 export function SettingsPage() {

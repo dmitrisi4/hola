@@ -1,10 +1,10 @@
+import { TanStackDevtools } from "@tanstack/react-devtools";
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import { TanStackDevtools } from "@tanstack/react-devtools";
+import { useEffect } from "react";
 
 import { AppProviders } from "@/app/providers/AppProviders";
 import appCss from "@/shared/styles/main.css?url";
-import { useEffect } from "react";
 
 export const Route = createRootRoute({
   head: () => ({

@@ -1,6 +1,8 @@
 import { ProfilePreview } from '@/entities/profile/ui/ProfilePreview'
-import type { Profile } from '@/entities/profile/model/types'
+
 import styles from './ProfileCard.module.css'
+
+import type { Profile } from '@/entities/profile/model/types'
 
 const demoProfile: Profile = {
   id: 'me',

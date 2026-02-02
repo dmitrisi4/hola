@@ -1,5 +1,6 @@
 import { useDrag } from "@use-gesture/react";
 import type React from "react";
+import { useState } from "react";
 import { animated, useSpring } from "react-spring";
 
 import { clamp } from "@/shared/lib/clamp";
@@ -19,6 +20,7 @@ const SWIPE_THRESHOLD = 120;
 const ROTATION = 12;
 
 export function SwipeCard({ index, onSwipe, children, background }: SwipeCardProps) {
+  const [intent, setIntent] = useState<SwipeDirection | null>(null);
   const [{ x, y, rot, scale }, api] = useSpring(() => ({
     x: 0,
     y: 0,
@@ -28,8 +30,22 @@ export function SwipeCard({ index, onSwipe, children, background }: SwipeCardPro
   }));
 
   const bind = useDrag(
-    ({ active, movement: [mx, my], velocity: [vx], direction: [dx], down, last }) => {
+    ({ active, movement: [mx, my], direction: [dx], down, last }) => {
       const trigger = Math.abs(mx) > SWIPE_THRESHOLD || Math.abs(my) > SWIPE_THRESHOLD;
+
+      if (active) {
+        const direction: SwipeDirection | null =
+          Math.abs(mx) > Math.abs(my)
+            ? mx > 0
+              ? "right"
+              : "left"
+            : my < 0
+              ? "up"
+              : null;
+        setIntent(trigger ? direction : null);
+      } else {
+        setIntent(null);
+      }
 
       if (last && trigger) {
         const direction: SwipeDirection =
@@ -82,6 +98,21 @@ export function SwipeCard({ index, onSwipe, children, background }: SwipeCardPro
         <img className={styles.bg} src={background} alt="" draggable={false} />
       ) : null}
       <div className={styles.overlay} />
+      {intent ? (
+        <div
+          className={`${styles.badge} ${
+            intent === "right"
+              ? styles.like
+              : intent === "left"
+                ? styles.nope
+                : styles.super
+          }`}
+        >
+          {intent === "right" && "LIKE"}
+          {intent === "left" && "NOPE"}
+          {intent === "up" && "SUPER"}
+        </div>
+      ) : null}
       {children}
     </animated.article>
   );

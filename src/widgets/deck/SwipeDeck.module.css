@@ -1,0 +1,15 @@
+.deck {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  display: grid;
+  gap: 12px;
+}
+
+.photo {
+  height: 280px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(110, 231, 183, 0.18), rgba(59, 130, 246, 0.12));
+}

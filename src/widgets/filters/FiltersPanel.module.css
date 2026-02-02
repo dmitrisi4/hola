@@ -1,0 +1,20 @@
+.panel {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.title {
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.meta {
+  color: var(--muted);
+  font-size: 12px;
+}

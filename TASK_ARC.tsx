@@ -1,129 +1,58 @@
+
+Актуальная схема (TanStack Start + Atomic Design)
+
 src/
-  routes/                           # TanStack Start routes (тонкие)
-    __root.tsx                      # подключаем main.css, layout shell
-    index.tsx                       # редирект/лендинг
-    (auth)/
-      login.tsx
-    (app)/
-      feed.tsx                      # свайпы (главный экран)
-      matches.tsx                   # мэтчи
-      chat.$chatId.tsx              # чат
-      profile.tsx                   # профиль
-      settings.tsx                  # настройки
+  routes/                           # file-driven маршруты TanStack Start (тонкие)
+    __root.tsx                      # layout shell, импорт shared/styles/main.css
+    index.tsx                       # landing/redirect
+    (auth)/login.tsx                # сегмент авторизации
+    (app)/                          # основной стек после login
+      feed.tsx
+      matches.tsx
+      chat.$chatId.tsx
+      profile.tsx
+      settings.tsx
+    routeTree.gen.ts                # автоген, не редактируем
 
-  app/
-    providers/
-      AppProviders.tsx              # QueryClient, theme init, etc
-    layout/
-      AppShell.tsx
-      AppShell.module.css           # layout styles (CSS Modules)
-      TopBar.tsx
-      TopBar.module.css
-      BottomNav.tsx
-      BottomNav.module.css
+  app/                              # инфраструктура приложения
+    providers/                      # QueryClient, theme, i18n, auth guard
+    layout/                         # AppShell/TopBar/BottomNav
+    router.tsx                      # createRouter + routeTree.gen, suspense boundary
 
-  pages/                            # композиции экранов (собирают widgets/features)
-    feed/
-      FeedPage.tsx
-      FeedPage.module.css
-    matches/
-      MatchesPage.tsx
-      MatchesPage.module.css
-    chat/
-      ChatPage.tsx
-      ChatPage.module.css
-    profile/
-      ProfilePage.tsx
-      ProfilePage.module.css
-    settings/
-      SettingsPage.tsx
-      SettingsPage.module.css
-    auth/
-      LoginPage.tsx
-      LoginPage.module.css
+  processes/                        # сквозные процессы (онбординг, платеж), опционально
 
-  widgets/                          # крупные блоки
-    deck/
-      SwipeDeck.tsx
-      SwipeDeck.module.css
-    card/
-      ProfileCard.tsx
-      ProfileCard.module.css
-    chat/
-      ChatList.tsx
-      ChatList.module.css
-      MessageBubble.tsx
-      MessageBubble.module.css
-    filters/
-      FiltersPanel.tsx
-      FiltersPanel.module.css
+  pages/                            # экранные композиции (используют widgets/features)
+    feed/FeedPage.tsx
+    matches/MatchesPage.tsx
+    chat/ChatPage.tsx
+    profile/ProfilePage.tsx
+    settings/SettingsPage.tsx
+    auth/LoginPage.tsx
 
-  features/                         # пользовательские сценарии
-    swipe/
-      ui/SwipeActions.tsx
-      ui/SwipeActions.module.css
-      model/useSwipe.ts
-      api/swipe.ts
-      index.ts
-    match/
-      ui/ItsAMatchModal.tsx
-      ui/ItsAMatchModal.module.css
-      model/useMatch.ts
-      index.ts
-    auth/
-      login/
-        ui/LoginForm.tsx
-        ui/LoginForm.module.css
-        model/useLogin.ts
-        api/login.ts
-        index.ts
-    profile/
-      edit-profile/
-        ui/EditProfileForm.tsx
-        ui/EditProfileForm.module.css
-        model/useEditProfile.ts
-        api/updateProfile.ts
-        index.ts
+  widgets/                          # организмы (layout-heavy UI без бизнес-логики)
+    deck/SwipeDeck.tsx
+    chat/ChatList.tsx
+    filters/FiltersPanel.tsx
+    card/ProfileCard.tsx
 
-  entities/                         # доменные сущности
-    user/
-      model/types.ts
-      api/queries.ts
-      ui/UserAvatar.tsx
-      ui/UserAvatar.module.css
-      index.ts
-    profile/
-      model/types.ts
-      ui/ProfilePreview.tsx
-      ui/ProfilePreview.module.css
-      index.ts
-    chat/
-      model/types.ts
-      api/queries.ts
-      index.ts
+  features/                         # пользовательские сценарии (use cases)
+    swipe/ { ui/, model/, api/ }
+    match/ { ui/, model/ }
+    auth/login/ { ui/, model/, api/ }
+    profile/edit-profile/ { ui/, model/, api/ }
 
-  shared/
-    styles/                         # ВАЖНО: глобальные токены и базовые стили
-      main.css                      # ✅ tokens + themes + reset + base typography
-      themes.css                    # (опционально) отдельные темы, если хочешь
-      media.css                     # (опционально) брейкпоинты/утилиты
-    ui/                             # атомарные компоненты (CSS Modules)
-      button/
-        Button.tsx
-        Button.module.css
-      input/
-        Input.tsx
-        Input.module.css
-      modal/
-        Modal.tsx
-        Modal.module.css
-      icon/
-        Icon.tsx
-        Icon.module.css
-    lib/
-      cn.ts                         # (опц.) helper для className
-      formatters.ts
-    api/
-      http.ts                       # ky/axios instance с интерсепторами
+  entities/                         # доменные модели и UI
+    user/ { model/types.ts, api/queries.ts, ui/UserAvatar.tsx }
+    profile/ { model/types.ts, ui/ProfilePreview.tsx }
+    chat/ { model/types.ts, api/queries.ts }
+
+  shared/                           # дизайн-система и базовые утилиты
+    ui/
+      atoms/                       # кнопки, инпуты, иконки, badge, loader
+      molecules/                   # связки атомов: InputField, AvatarWithBadge
+      organisms/                   # чистые UI-блоки без бизнес-логики: AppHeader, ModalShell
+    styles/ { main.css, themes.css, media.css }
+    lib/ { cn.ts, formatters.ts }
+    api/ { http.ts }
+    config/                        # env, constants
     types/
-    constants/

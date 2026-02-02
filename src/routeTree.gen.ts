@@ -10,9 +10,15 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as authLoginRouteImport } from './routes/(auth)/login'
+import { Route as appSettingsRouteImport } from './routes/(app)/settings'
+import { Route as appProfileRouteImport } from './routes/(app)/profile'
+import { Route as appMatchesRouteImport } from './routes/(app)/matches'
+import { Route as appFeedRouteImport } from './routes/(app)/feed'
 import { Route as DemoStartServerFuncsRouteImport } from './routes/demo/start.server-funcs'
 import { Route as DemoStartApiRequestRouteImport } from './routes/demo/start.api-request'
 import { Route as DemoApiNamesRouteImport } from './routes/demo/api.names'
+import { Route as appChatChatIdRouteImport } from './routes/(app)/chat.$chatId'
 import { Route as DemoStartSsrIndexRouteImport } from './routes/demo/start.ssr.index'
 import { Route as DemoStartSsrSpaModeRouteImport } from './routes/demo/start.ssr.spa-mode'
 import { Route as DemoStartSsrFullSsrRouteImport } from './routes/demo/start.ssr.full-ssr'
@@ -21,6 +27,31 @@ import { Route as DemoStartSsrDataOnlyRouteImport } from './routes/demo/start.ss
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const authLoginRoute = authLoginRouteImport.update({
+  id: '/(auth)/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const appSettingsRoute = appSettingsRouteImport.update({
+  id: '/(app)/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const appProfileRoute = appProfileRouteImport.update({
+  id: '/(app)/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const appMatchesRoute = appMatchesRouteImport.update({
+  id: '/(app)/matches',
+  path: '/matches',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const appFeedRoute = appFeedRouteImport.update({
+  id: '/(app)/feed',
+  path: '/feed',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoStartServerFuncsRoute = DemoStartServerFuncsRouteImport.update({
@@ -36,6 +67,11 @@ const DemoStartApiRequestRoute = DemoStartApiRequestRouteImport.update({
 const DemoApiNamesRoute = DemoApiNamesRouteImport.update({
   id: '/demo/api/names',
   path: '/demo/api/names',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const appChatChatIdRoute = appChatChatIdRouteImport.update({
+  id: '/(app)/chat/$chatId',
+  path: '/chat/$chatId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoStartSsrIndexRoute = DemoStartSsrIndexRouteImport.update({
@@ -61,6 +97,12 @@ const DemoStartSsrDataOnlyRoute = DemoStartSsrDataOnlyRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/feed': typeof appFeedRoute
+  '/matches': typeof appMatchesRoute
+  '/profile': typeof appProfileRoute
+  '/settings': typeof appSettingsRoute
+  '/login': typeof authLoginRoute
+  '/chat/$chatId': typeof appChatChatIdRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
   '/demo/start/server-funcs': typeof DemoStartServerFuncsRoute
@@ -71,6 +113,12 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/feed': typeof appFeedRoute
+  '/matches': typeof appMatchesRoute
+  '/profile': typeof appProfileRoute
+  '/settings': typeof appSettingsRoute
+  '/login': typeof authLoginRoute
+  '/chat/$chatId': typeof appChatChatIdRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
   '/demo/start/server-funcs': typeof DemoStartServerFuncsRoute
@@ -82,6 +130,12 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/(app)/feed': typeof appFeedRoute
+  '/(app)/matches': typeof appMatchesRoute
+  '/(app)/profile': typeof appProfileRoute
+  '/(app)/settings': typeof appSettingsRoute
+  '/(auth)/login': typeof authLoginRoute
+  '/(app)/chat/$chatId': typeof appChatChatIdRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
   '/demo/start/server-funcs': typeof DemoStartServerFuncsRoute
@@ -94,6 +148,12 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/feed'
+    | '/matches'
+    | '/profile'
+    | '/settings'
+    | '/login'
+    | '/chat/$chatId'
     | '/demo/api/names'
     | '/demo/start/api-request'
     | '/demo/start/server-funcs'
@@ -104,6 +164,12 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/feed'
+    | '/matches'
+    | '/profile'
+    | '/settings'
+    | '/login'
+    | '/chat/$chatId'
     | '/demo/api/names'
     | '/demo/start/api-request'
     | '/demo/start/server-funcs'
@@ -114,6 +180,12 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/(app)/feed'
+    | '/(app)/matches'
+    | '/(app)/profile'
+    | '/(app)/settings'
+    | '/(auth)/login'
+    | '/(app)/chat/$chatId'
     | '/demo/api/names'
     | '/demo/start/api-request'
     | '/demo/start/server-funcs'
@@ -125,6 +197,12 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  appFeedRoute: typeof appFeedRoute
+  appMatchesRoute: typeof appMatchesRoute
+  appProfileRoute: typeof appProfileRoute
+  appSettingsRoute: typeof appSettingsRoute
+  authLoginRoute: typeof authLoginRoute
+  appChatChatIdRoute: typeof appChatChatIdRoute
   DemoApiNamesRoute: typeof DemoApiNamesRoute
   DemoStartApiRequestRoute: typeof DemoStartApiRequestRoute
   DemoStartServerFuncsRoute: typeof DemoStartServerFuncsRoute
@@ -141,6 +219,41 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(auth)/login': {
+      id: '/(auth)/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof authLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(app)/settings': {
+      id: '/(app)/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof appSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(app)/profile': {
+      id: '/(app)/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof appProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(app)/matches': {
+      id: '/(app)/matches'
+      path: '/matches'
+      fullPath: '/matches'
+      preLoaderRoute: typeof appMatchesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(app)/feed': {
+      id: '/(app)/feed'
+      path: '/feed'
+      fullPath: '/feed'
+      preLoaderRoute: typeof appFeedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demo/start/server-funcs': {
@@ -162,6 +275,13 @@ declare module '@tanstack/react-router' {
       path: '/demo/api/names'
       fullPath: '/demo/api/names'
       preLoaderRoute: typeof DemoApiNamesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(app)/chat/$chatId': {
+      id: '/(app)/chat/$chatId'
+      path: '/chat/$chatId'
+      fullPath: '/chat/$chatId'
+      preLoaderRoute: typeof appChatChatIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demo/start/ssr/': {
@@ -197,6 +317,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  appFeedRoute: appFeedRoute,
+  appMatchesRoute: appMatchesRoute,
+  appProfileRoute: appProfileRoute,
+  appSettingsRoute: appSettingsRoute,
+  authLoginRoute: authLoginRoute,
+  appChatChatIdRoute: appChatChatIdRoute,
   DemoApiNamesRoute: DemoApiNamesRoute,
   DemoStartApiRequestRoute: DemoStartApiRequestRoute,
   DemoStartServerFuncsRoute: DemoStartServerFuncsRoute,

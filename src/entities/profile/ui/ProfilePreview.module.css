@@ -1,0 +1,13 @@
+.wrap {
+  display: grid;
+  gap: 8px;
+}
+
+.name {
+  font-weight: 800;
+}
+
+.meta {
+  color: var(--muted);
+  font-size: 12px;
+}

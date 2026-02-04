@@ -17,7 +17,7 @@ type SwipeCardProps = {
 };
 
 const SWIPE_THRESHOLD = 120;
-const ROTATION = 12;
+const MAX_ROTATION_DEG = 10;
 
 export function SwipeCard({ index, onSwipe, children, background }: SwipeCardProps) {
   const [intent, setIntent] = useState<SwipeDirection | null>(null);
@@ -35,13 +35,7 @@ export function SwipeCard({ index, onSwipe, children, background }: SwipeCardPro
 
       if (active) {
         const direction: SwipeDirection | null =
-          Math.abs(mx) > Math.abs(my)
-            ? mx > 0
-              ? "right"
-              : "left"
-            : my < 0
-              ? "up"
-              : null;
+          Math.abs(mx) > Math.abs(my) ? (mx > 0 ? "right" : "left") : my < 0 ? "up" : null;
         setIntent(trigger ? direction : null);
       } else {
         setIntent(null);
@@ -49,13 +43,7 @@ export function SwipeCard({ index, onSwipe, children, background }: SwipeCardPro
 
       if (last && trigger) {
         const direction: SwipeDirection =
-          Math.abs(mx) > Math.abs(my)
-            ? dx > 0
-              ? "right"
-              : "left"
-            : my < 0
-              ? "up"
-              : "down";
+          Math.abs(mx) > Math.abs(my) ? (dx > 0 ? "right" : "left") : my < 0 ? "up" : "down";
 
         const flyAwayX = clamp(mx * 2, -800, 800);
         const flyAwayY = clamp(my * 2, -800, 800);
@@ -63,7 +51,7 @@ export function SwipeCard({ index, onSwipe, children, background }: SwipeCardPro
         api.start({
           x: flyAwayX,
           y: flyAwayY,
-          rot: dx * ROTATION * 2,
+          rot: dx * MAX_ROTATION_DEG,
           scale: 1,
           immediate: false,
           onResolve: () => onSwipe?.(direction),
@@ -74,12 +62,12 @@ export function SwipeCard({ index, onSwipe, children, background }: SwipeCardPro
       api.start({
         x: active ? mx : 0,
         y: active ? my : 0,
-        rot: (mx / 10) * ROTATION,
+        rot: clamp(mx / 15, -MAX_ROTATION_DEG, MAX_ROTATION_DEG),
         scale: active ? 1.02 : 1,
         immediate: down,
       });
     },
-    { filterTaps: true }
+    { filterTaps: true },
   );
 
   return (
@@ -95,17 +83,18 @@ export function SwipeCard({ index, onSwipe, children, background }: SwipeCardPro
       {...bind()}
     >
       {background ? (
-        <img className={styles.bg} src={background} alt="" draggable={false} />
+        <img
+          className={styles.bg}
+          src={background}
+          alt=""
+          draggable={false}
+        />
       ) : null}
       <div className={styles.overlay} />
       {intent ? (
         <div
           className={`${styles.badge} ${
-            intent === "right"
-              ? styles.like
-              : intent === "left"
-                ? styles.nope
-                : styles.super
+            intent === "right" ? styles.like : intent === "left" ? styles.nope : styles.super
           }`}
         >
           {intent === "right" && "LIKE"}

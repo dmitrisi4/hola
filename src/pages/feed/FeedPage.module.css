@@ -4,3 +4,10 @@
   display: grid;
   gap: 12px;
 }
+
+.counters {
+  display: flex;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-secondary, #6b7280);
+}

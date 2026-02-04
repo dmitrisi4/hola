@@ -15,6 +15,7 @@ import { Route as appSettingsRouteImport } from './routes/(app)/settings'
 import { Route as appProfileRouteImport } from './routes/(app)/profile'
 import { Route as appMatchesRouteImport } from './routes/(app)/matches'
 import { Route as appFeedRouteImport } from './routes/(app)/feed'
+import { Route as appChatsRouteImport } from './routes/(app)/chats'
 import { Route as appChatChatIdRouteImport } from './routes/(app)/chat.$chatId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -47,6 +48,11 @@ const appFeedRoute = appFeedRouteImport.update({
   path: '/feed',
   getParentRoute: () => rootRouteImport,
 } as any)
+const appChatsRoute = appChatsRouteImport.update({
+  id: '/(app)/chats',
+  path: '/chats',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const appChatChatIdRoute = appChatChatIdRouteImport.update({
   id: '/(app)/chat/$chatId',
   path: '/chat/$chatId',
@@ -55,6 +61,7 @@ const appChatChatIdRoute = appChatChatIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/chats': typeof appChatsRoute
   '/feed': typeof appFeedRoute
   '/matches': typeof appMatchesRoute
   '/profile': typeof appProfileRoute
@@ -64,6 +71,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/chats': typeof appChatsRoute
   '/feed': typeof appFeedRoute
   '/matches': typeof appMatchesRoute
   '/profile': typeof appProfileRoute
@@ -74,6 +82,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/(app)/chats': typeof appChatsRoute
   '/(app)/feed': typeof appFeedRoute
   '/(app)/matches': typeof appMatchesRoute
   '/(app)/profile': typeof appProfileRoute
@@ -85,6 +94,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/chats'
     | '/feed'
     | '/matches'
     | '/profile'
@@ -94,6 +104,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/chats'
     | '/feed'
     | '/matches'
     | '/profile'
@@ -103,6 +114,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/(app)/chats'
     | '/(app)/feed'
     | '/(app)/matches'
     | '/(app)/profile'
@@ -113,6 +125,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  appChatsRoute: typeof appChatsRoute
   appFeedRoute: typeof appFeedRoute
   appMatchesRoute: typeof appMatchesRoute
   appProfileRoute: typeof appProfileRoute
@@ -165,6 +178,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appFeedRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(app)/chats': {
+      id: '/(app)/chats'
+      path: '/chats'
+      fullPath: '/chats'
+      preLoaderRoute: typeof appChatsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/(app)/chat/$chatId': {
       id: '/(app)/chat/$chatId'
       path: '/chat/$chatId'
@@ -177,6 +197,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  appChatsRoute: appChatsRoute,
   appFeedRoute: appFeedRoute,
   appMatchesRoute: appMatchesRoute,
   appProfileRoute: appProfileRoute,

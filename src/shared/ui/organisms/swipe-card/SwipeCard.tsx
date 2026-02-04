@@ -3,11 +3,10 @@ import type React from "react";
 import { useState } from "react";
 import { animated, useSpring } from "react-spring";
 
+import { SwipeDirection } from "@/features/swipe/model/types";
 import { clamp } from "@/shared/lib/clamp";
 
 import styles from "./SwipeCard.module.css";
-
-type SwipeDirection = "left" | "right" | "up" | "down";
 
 type SwipeCardProps = {
   index: number;

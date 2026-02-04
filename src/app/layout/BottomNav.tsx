@@ -28,6 +28,14 @@ export function BottomNav() {
           Matches
         </Link>
         <Link
+          to="/chats"
+          className={`${styles.item} ${
+            isActive(pathname, '/chats') ? styles.itemActive : ''
+          }`}
+        >
+          Chats
+        </Link>
+        <Link
           to="/profile"
           className={`${styles.item} ${
             isActive(pathname, '/profile') ? styles.itemActive : ''

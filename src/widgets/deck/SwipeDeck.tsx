@@ -1,18 +1,17 @@
-import { useMemo } from "react";
-
 import type { Profile } from "@/entities/profile/model/types";
+import { SwipeDirection } from "@/features/swipe/model/types";
 import { SwipeCard } from "@/shared/ui/organisms/swipe-card/SwipeCard";
 
 import styles from "./SwipeDeck.module.css";
 
 type PropsType = {
   profiles: Profile[];
+  onSwipe: (profileId: string, direction: SwipeDirection) => void;
 };
 
-export function SwipeDeck({ profiles }: PropsType) {
-  const handleSwipe = (id: string, direction: "left" | "right" | "up" | "down") => {
-    // eslint-disable-next-line no-console
-    console.warn("swipe", { id, direction });
+export function SwipeDeck({ profiles, onSwipe }: PropsType) {
+  const handleSwipe = (id: string, direction: SwipeDirection) => {
+    onSwipe(id, direction);
   };
 
   return (

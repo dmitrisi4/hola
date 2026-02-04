@@ -1,12 +1,18 @@
+import {
+  useCallback,
+  useState,
+} from "react";
+
 import { AppShell } from "@/app/layout/AppShell";
+import { Profile } from "@/entities/profile/model/types";
+import { SwipeDirection } from "@/features/swipe/model/types";
 import { SwipeActions } from "@/features/swipe/ui/SwipeActions";
 import { SwipeDeck } from "@/widgets/deck/SwipeDeck";
 import { FiltersPanel } from "@/widgets/filters/FiltersPanel";
 
 import styles from "./FeedPage.module.css";
-import { Profile } from "@/entities/profile/model/types";
 
-const profiles: Profile[] = [
+const initialProfiles: Profile[] = [
   {
     id: "p1",
     displayName: "Ava",
@@ -37,12 +43,52 @@ const profiles: Profile[] = [
 ];
 
 export function FeedPage() {
+  const [deck, setDeck] = useState<Profile[]>(initialProfiles);
+  const [likedProfiles, setLikedProfiles] = useState<Profile[]>([]);
+  const [nopedProfiles, setNopedProfiles] = useState<Profile[]>([]);
+  const [superLikedProfiles, setSuperLikedProfiles] = useState<Profile[]>([]);
+
+  const handleSwipe = useCallback((profileId: string, direction: SwipeDirection) => {
+    setDeck((prevDeck) => {
+      const targetProfile = prevDeck.find((profile) => profile.id === profileId);
+      if (!targetProfile) {
+        return prevDeck;
+      }
+
+      if (direction === "right") {
+        setLikedProfiles((prev) => [...prev, targetProfile]);
+      } else if (direction === "left" || direction === "down") {
+        setNopedProfiles((prev) => [...prev, targetProfile]);
+      } else if (direction === "up") {
+        setSuperLikedProfiles((prev) => [...prev, targetProfile]);
+      }
+
+      return prevDeck.filter((profile) => profile.id !== profileId);
+    });
+  }, []);
+
+  const handleActionClick = useCallback(
+    (direction: SwipeDirection) => {
+      const currentProfile = deck[0];
+      if (!currentProfile) {
+        return;
+      }
+      handleSwipe(currentProfile.id, direction);
+    },
+    [deck, handleSwipe],
+  );
+
   return (
     <AppShell title="Feed">
       <div className={styles.grid}>
         <FiltersPanel />
-        <SwipeDeck profiles={profiles} />
-        <SwipeActions />
+        <SwipeDeck profiles={deck} onSwipe={handleSwipe} />
+        <SwipeActions onAction={handleActionClick} disabled={!deck.length} />
+        <div className={styles.counters}>
+          <span>Liked: {likedProfiles.length}</span>
+          <span>Nope: {nopedProfiles.length}</span>
+          <span>Super: {superLikedProfiles.length}</span>
+        </div>
       </div>
     </AppShell>
   );

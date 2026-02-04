@@ -138,7 +138,7 @@ export function ChatsPage() {
           <div className={styles.sidebarHeader}>
             <div className={styles.sidebarTitle}>Chats</div>
             <button className={styles.iconButton} type="button" aria-label="New chat">
-              +
+              <span>+</span>
             </button>
           </div>
           <div className={styles.search}>

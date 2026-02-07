@@ -1,9 +1,7 @@
-import {
-  useMemo,
-  useState,
-} from "react";
+import { useMemo, useState } from "react";
 
 import { AppShell } from "@/app/layout/AppShell";
+import { Modal } from "@/shared/ui/organisms/modal/Modal";
 
 import styles from "./ChatsPage.module.css";
 
@@ -124,12 +122,47 @@ function formatTimestamp(label: string) {
   );
 }
 
+const contacts = [
+  {
+    id: "c1",
+    name: "Андрик Life^_^",
+    status: "last seen 5 minutes ago",
+    avatar: "https://i.pravatar.cc/160?img=24",
+  },
+  {
+    id: "c2",
+    name: "Вон Pol",
+    status: "online",
+    avatar: "https://i.pravatar.cc/160?img=35",
+  },
+  {
+    id: "c3",
+    name: "Мама",
+    status: "last seen recently",
+    avatar: "https://i.pravatar.cc/160?img=48",
+  },
+  {
+    id: "c4",
+    name: "Бодя",
+    status: "last seen recently",
+    avatar: "https://i.pravatar.cc/160?img=52",
+  },
+];
+
 export function ChatsPage() {
   const [activeChatId, setActiveChatId] = useState<string>(chats[0]?.id ?? "");
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
+  const [country, setCountry] = useState("Spain");
+  const [city, setCity] = useState("Barcelona");
   const activeChat = useMemo(
     () => chats.find((chat) => chat.id === activeChatId),
     [activeChatId],
   );
+
+  const toggleContact = (id: string) => {
+    setSelectedContacts((prev) => (prev.includes(id) ? prev.filter((v) => v !== id) : [...prev, id]));
+  };
 
   return (
     <AppShell title="Chats">
@@ -137,7 +170,12 @@ export function ChatsPage() {
         <aside className={styles.sidebar}>
           <div className={styles.sidebarHeader}>
             <div className={styles.sidebarTitle}>Chats</div>
-            <button className={styles.iconButton} type="button" aria-label="New chat">
+            <button
+              className={styles.iconButton}
+              type="button"
+              aria-label="New chat"
+              onClick={() => setIsCreateOpen(true)}
+            >
               <span>+</span>
             </button>
           </div>
@@ -219,6 +257,73 @@ export function ChatsPage() {
           )}
         </section>
       </div>
+
+      <Modal isOpen={isCreateOpen} onClose={() => setIsCreateOpen(false)} title="Create group">
+        <div className={styles.modalForm}>
+          <label className={styles.field}>
+            <span className={styles.fieldLabel}>Group name</span>
+            <input className={styles.input} type="text" placeholder="Enter name" />
+          </label>
+
+          <label className={styles.field}>
+            <span className={styles.fieldLabel}>Description</span>
+            <textarea className={styles.textarea} rows={3} placeholder="What is this group about?" />
+          </label>
+
+          <div className={styles.fieldRow}>
+            <label className={styles.field}>
+              <span className={styles.fieldLabel}>Country</span>
+              <select
+                className={styles.select}
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+              >
+                <option>Spain</option>
+                <option>USA</option>
+                <option>Ukraine</option>
+              </select>
+            </label>
+            <label className={styles.field}>
+              <span className={styles.fieldLabel}>City</span>
+              <select className={styles.select} value={city} onChange={(e) => setCity(e.target.value)}>
+                <option>Barcelona</option>
+                <option>Kyiv</option>
+                <option>New York</option>
+              </select>
+            </label>
+          </div>
+
+          <div className={styles.contactsBlock}>
+            <input
+              className={styles.contactSearch}
+              placeholder="Who would you like to add?"
+              type="text"
+            />
+            <div className={styles.contactsHeader}>Frequent contacts</div>
+            <div className={styles.contactsList}>
+              {contacts.map((contact) => (
+                <button
+                  key={contact.id}
+                  type="button"
+                  className={`${styles.contactItem} ${
+                    selectedContacts.includes(contact.id) ? styles.contactItemActive : ""
+                  }`}
+                  onClick={() => toggleContact(contact.id)}
+                >
+                  <img className={styles.contactAvatar} src={contact.avatar} alt="" />
+                  <div className={styles.contactInfo}>
+                    <div className={styles.contactName}>{contact.name}</div>
+                    <div className={styles.contactStatus}>{contact.status}</div>
+                  </div>
+                  <span className={styles.contactCheck}>
+                    {selectedContacts.includes(contact.id) ? "●" : "○"}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Modal>
     </AppShell>
   );
 }

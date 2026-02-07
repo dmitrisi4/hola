@@ -281,6 +281,125 @@
   font-size: 14px;
 }
 
+.modalForm {
+  display: grid;
+  gap: 14px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.fieldLabel {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  padding: 10px 12px;
+  outline: none;
+}
+
+.textarea {
+  resize: vertical;
+}
+
+.select {
+  appearance: none;
+}
+
+.contactsBlock {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.contactSearch {
+  width: 100%;
+  padding: 12px 14px;
+  background: #162032;
+  border: none;
+  color: var(--text);
+  outline: none;
+}
+
+.contactsHeader {
+  padding: 8px 14px;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.contactsList {
+  display: flex;
+  flex-direction: column;
+}
+
+.contactItem {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  text-align: left;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.contactItem:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.contactItemActive {
+  background: rgba(110, 231, 183, 0.08);
+}
+
+.contactAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.contactInfo {
+  display: grid;
+  gap: 2px;
+}
+
+.contactName {
+  font-weight: 600;
+}
+
+.contactStatus {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.contactCheck {
+  font-size: 16px;
+  color: var(--muted);
+  padding-left: 6px;
+}
+
 @media (max-width: 960px) {
   .layout {
     grid-template-columns: 1fr;

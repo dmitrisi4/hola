@@ -3,6 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "gen:backend-types": "npm --prefix ../backend run gen:types",
+    "predev": "npm run gen:backend-types",
+    "prebuild": "npm run gen:backend-types",
     "dev": "vite dev --port 3000",
     "build": "vite build",
     "preview": "vite preview",

@@ -15,8 +15,8 @@ export function LoginPage() {
           <Link to="/" style={{ color: 'var(--muted)', fontSize: 12 }}>
             Back to landing
           </Link>
-          <Link to="/feed" style={{ color: 'var(--accent)', fontSize: 12 }}>
-            Continue
+          <Link to="/signup" style={{ color: 'var(--accent)', fontSize: 12 }}>
+            Create account
           </Link>
         </div>
       </div>

@@ -1,7 +1,6 @@
-import type { AuthAccess } from "@backend-types/rest";
+import { http, setAccessToken, type HttpError } from "@/shared/api/http";
 
-import { http } from "@/shared/api/http";
-import type { HttpError } from "@/shared/api/http";
+import type { AuthAccess } from "@backend-types/rest";
 
 export type LoginRequest = {
   email: string;
@@ -10,15 +9,16 @@ export type LoginRequest = {
 
 export type LoginResponse = AuthAccess;
 
-const API_BASE = import.meta.env.VITE_API_HTTP ?? "http://localhost:8000/api";
-
 export async function login(req: LoginRequest): Promise<LoginResponse> {
   try {
-    const { data } = await http<LoginResponse>(`${API_BASE}/auth/login`, {
+    const { data } = await http<LoginResponse>("auth/login", {
       method: "POST",
-      credentials: "include",
-      body: JSON.stringify(req),
+      json: req,
+      context: {
+        skipAuthRefresh: true,
+      },
     });
+    setAccessToken(data.accessToken);
     return data;
   } catch (error) {
     if (error && typeof error === "object" && "message" in error) {

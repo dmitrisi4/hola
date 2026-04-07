@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 
 import { Button } from "@/shared/ui/atoms/button/Button";
@@ -10,6 +10,7 @@ import { signupSchema, type SignupFormData } from "../model/signupValidation";
 import { useSignup } from "../model/useSignup";
 
 export function SignupForm() {
+  const router = useRouter();
   const signup = useSignup();
 
   const [email, setEmail] = useState("demo+new@hola.app");
@@ -47,6 +48,7 @@ export function SignupForm() {
     try {
       await signup.mutateAsync({ email, password });
       setServerError(null);
+      await router.navigate({ to: "/profile", replace: true });
     } catch (err) {
       const message = err instanceof Error ? err.message : "Signup failed. Please try again.";
       setServerError(message);

@@ -1,18 +1,35 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouter } from "@tanstack/react-router";
+import { useEffect } from "react";
 
 import { useAuth } from "@/app/providers/AuthProvider";
 
 import styles from "./LandingPage.module.css";
 
 export function LandingPage() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
+  const router = useRouter();
 
-  if (isAuthenticated) {
-    // Server-side safe redirect
+  useEffect(() => {
+    if (!isLoading && isAuthenticated) {
+      void router.navigate({ to: "/feed", replace: true });
+    }
+  }, [isLoading, isAuthenticated, router]);
+
+  if (isLoading) {
     return (
       <div className={styles.wrap}>
         <div className={styles.card}>
-          <p>Redirecting to feed…</p>
+          <p>Loading…</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (isAuthenticated) {
+    return (
+      <div className={styles.wrap}>
+        <div className={styles.card}>
+          <p>Redirecting…</p>
         </div>
       </div>
     );

@@ -1,8 +1,9 @@
-import type { Profile } from "@/entities/profile/model/types";
 import { SwipeDirection } from "@/features/swipe/model/types";
 import { SwipeCard } from "@/shared/ui/organisms/swipe-card/SwipeCard";
 
 import styles from "./SwipeDeck.module.css";
+
+import type { Profile } from "@/entities/profile/model/types";
 
 type PropsType = {
   profiles: Profile[];

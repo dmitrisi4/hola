@@ -1,7 +1,8 @@
-import type React from "react";
 import { useEffect } from "react";
 
 import styles from "./Modal.module.css";
+
+import type React from "react";
 
 type ModalProps = {
   isOpen: boolean;

@@ -1,0 +1,9 @@
+.wrap {
+  padding: 16px 0;
+}
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+}

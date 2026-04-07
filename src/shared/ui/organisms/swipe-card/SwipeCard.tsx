@@ -1,5 +1,4 @@
 import { useDrag } from "@use-gesture/react";
-import type React from "react";
 import { useState } from "react";
 import { animated, useSpring } from "react-spring";
 
@@ -7,6 +6,8 @@ import { SwipeDirection } from "@/features/swipe/model/types";
 import { clamp } from "@/shared/lib/clamp";
 
 import styles from "./SwipeCard.module.css";
+
+import type React from "react";
 
 type SwipeCardProps = {
   index: number;

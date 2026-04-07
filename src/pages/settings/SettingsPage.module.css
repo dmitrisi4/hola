@@ -22,3 +22,7 @@
   color: var(--muted);
   font-size: 12px;
 }
+
+.logout {
+  margin-top: 12px;
+}

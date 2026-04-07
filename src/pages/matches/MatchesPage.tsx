@@ -1,8 +1,8 @@
 import { AppShell } from '@/app/layout/AppShell'
+import { ChatList } from '@/widgets/chat/ChatList'
 
 import styles from './MatchesPage.module.css'
 
-import { ChatList } from '@/widgets/chat/ChatList'
 
 export function MatchesPage() {
   return (

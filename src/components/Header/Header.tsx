@@ -1,6 +1,6 @@
-import { Link } from '@tanstack/react-router'
+import { Link } from "@tanstack/react-router";
 
-import './Header.css'
+import "./Header.css";
 
 export default function Header() {
   return (
@@ -9,19 +9,16 @@ export default function Header() {
         <div className="nav-item">
           <Link to="/">Home</Link>
         </div>
-
-        <div className="px-2 font-bold">
-          <Link to="/demo/start/server-funcs">Start - Server Functions</Link>
+        <div className="nav-item">
+          <Link to="/login">Login</Link>
         </div>
-
-        <div className="px-2 font-bold">
-          <Link to="/demo/start/api-request">Start - API Request</Link>
+        <div className="nav-item">
+          <Link to="/signup">Sign Up</Link>
         </div>
-
-        <div className="px-2 font-bold">
-          <Link to="/demo/start/ssr">Start - SSR Demos</Link>
+        <div className="nav-item">
+          <Link to="/feed">Feed</Link>
         </div>
       </nav>
     </header>
-  )
+  );
 }

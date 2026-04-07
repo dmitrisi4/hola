@@ -5,13 +5,10 @@ import Header from "./Header";
 
 import type { ComponentProps } from "react";
 
-
 type MockLinkProps = ComponentProps<"a"> & { to: string | URL };
 
 vi.mock("@tanstack/react-router", async (importOriginal) => {
-    const actual = await importOriginal<
-        typeof import("@tanstack/react-router")
-    >();
+  const actual = await importOriginal<typeof import("@tanstack/react-router")>();
 
   return {
     ...actual,
@@ -31,26 +28,17 @@ describe("Header", () => {
     render(<Header />);
 
     expect(screen.getByRole("link", { name: "Home" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Start - Server Functions" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Start - API Request" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Start - SSR Demos" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Login" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Sign Up" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Feed" })).toBeInTheDocument();
   });
 
   it("has correct links", () => {
     render(<Header />);
 
     expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
-    expect(screen.getByRole("link", { name: "Start - Server Functions" })).toHaveAttribute(
-      "href",
-      "/demo/start/server-funcs",
-    );
-    expect(screen.getByRole("link", { name: "Start - API Request" })).toHaveAttribute(
-      "href",
-      "/demo/start/api-request",
-    );
-    expect(screen.getByRole("link", { name: "Start - SSR Demos" })).toHaveAttribute(
-      "href",
-      "/demo/start/ssr",
-    );
+    expect(screen.getByRole("link", { name: "Login" })).toHaveAttribute("href", "/login");
+    expect(screen.getByRole("link", { name: "Sign Up" })).toHaveAttribute("href", "/signup");
+    expect(screen.getByRole("link", { name: "Feed" })).toHaveAttribute("href", "/feed");
   });
 });

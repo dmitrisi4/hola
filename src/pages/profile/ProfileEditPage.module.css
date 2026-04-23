@@ -1,0 +1,516 @@
+.page {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── Photo grid ────────────────────────────────────────── */
+.photoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.photoMain {
+  grid-column: 1 / 3;
+  grid-row: 1 / 3;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #1a1a1a;
+  aspect-ratio: 5 / 6;
+}
+
+.photoSlot {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #1a1a1a;
+  aspect-ratio: 5 / 6;
+  position: relative;
+}
+
+/* ── Photo hover overlay ────────────────────────────────── */
+.photoOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px;
+}
+
+.overlayBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  padding: 7px 6px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background 0.15s;
+}
+
+.overlayBtn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.overlayBtnDanger {
+  background: rgba(220, 38, 38, 0.55);
+}
+
+.overlayBtnDanger:hover {
+  background: rgba(220, 38, 38, 0.75);
+}
+
+.photoSlotEmpty {
+  border: 2px dashed rgba(255, 255, 255, 0.12);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.photoSlotEmpty:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photoEditBtn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s;
+}
+
+.photoEditBtn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* ── Section ────────────────────────────────────────────── */
+.section {
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sectionTitle {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #6ee7b7;
+  margin: 0 0 12px;
+}
+
+/* ── Fields ─────────────────────────────────────────────── */
+.field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 48px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 6px 0;
+}
+
+.field:last-child {
+  border-bottom: none;
+}
+
+.fieldColumn {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.fieldRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.fieldLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: #9aa8c7;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.fieldHint {
+  font-size: 12px;
+  color: #555f7a;
+  margin: 4px 0 0;
+}
+
+.fieldMuted {
+  font-size: 13px;
+  color: #6b7694;
+}
+
+.fieldValue {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  color: #e8eefc;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-align: right;
+  transition: color 0.15s;
+}
+
+.fieldValue:hover {
+  color: #ffffff;
+}
+
+.fieldValueBio {
+  text-align: left;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #c4cfe8;
+}
+
+.fieldEdit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.fieldInput {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 15px;
+  color: #e8eefc;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.fieldInput:focus {
+  border-color: #6ee7b7;
+}
+
+.fieldTextarea {
+  resize: none;
+  width: 100%;
+}
+
+.fieldSave {
+  padding: 8px 16px;
+  background: #6ee7b7;
+  color: #0b0f17;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.fieldSave:hover {
+  background: #4fd3a0;
+}
+
+/* ── Chips ──────────────────────────────────────────────── */
+.chipGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 10px 16px;
+  border-radius: 100px;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  color: #9aa8c7;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.chip:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #e8eefc;
+}
+
+.chipActive {
+  border-color: #6ee7b7 !important;
+  color: #6ee7b7 !important;
+  background: rgba(110, 231, 183, 0.08);
+}
+
+.chipSm {
+  padding: 7px 12px;
+  border-radius: 100px;
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: #9aa8c7;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.chipSm:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #e8eefc;
+}
+
+/* ── Lifestyle rows ─────────────────────────────────────── */
+.lifestyleRow {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lifestyleRow:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.lifestyleLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: #9aa8c7;
+}
+
+.lifestyleChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* ── Segmented control ──────────────────────────────────── */
+.segmented {
+  display: flex;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.segmentBtn {
+  flex: 1;
+  padding: 7px 12px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #9aa8c7;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.segmentActive {
+  background: #1e2a3a;
+  color: #6ee7b7;
+  font-weight: 600;
+}
+
+/* ── Range sliders ──────────────────────────────────────── */
+.rangeRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rangeLabel {
+  font-size: 12px;
+  color: #555f7a;
+  width: 24px;
+  flex-shrink: 0;
+}
+
+.range {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+  cursor: pointer;
+}
+
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #6ee7b7;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(110, 231, 183, 0.4);
+}
+
+.range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #6ee7b7;
+  cursor: pointer;
+  border: none;
+}
+
+.rangeValue {
+  font-size: 12px;
+  color: #9aa8c7;
+  min-width: 36px;
+  text-align: right;
+}
+
+/* ── Toggle ─────────────────────────────────────────────── */
+.toggle {
+  flex-shrink: 0;
+  width: 48px;
+  height: 28px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s;
+  padding: 0;
+}
+
+.toggleOn {
+  background: #6ee7b7;
+}
+
+.toggleThumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.toggleOn .toggleThumb {
+  transform: translateX(20px);
+}
+
+/* ── Settings list ──────────────────────────────────────── */
+.settingsList {
+  display: flex;
+  flex-direction: column;
+}
+
+.settingsRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  cursor: pointer;
+  color: #e8eefc;
+  text-align: left;
+  transition: opacity 0.15s;
+  border-radius: 0;
+  width: 100%;
+}
+
+.settingsRow:last-child {
+  border-bottom: none;
+}
+
+.settingsRow:hover {
+  opacity: 0.75;
+}
+
+.settingsIcon {
+  display: flex;
+  align-items: center;
+  color: #9aa8c7;
+  flex-shrink: 0;
+}
+
+.settingsLabel {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.settingsValue {
+  font-size: 13px;
+  color: #555f7a;
+}
+
+.chevron {
+  color: #555f7a;
+  flex-shrink: 0;
+}
+
+.danger .settingsLabel {
+  color: #f87171;
+}
+
+.danger .settingsIcon {
+  color: #f87171;
+}
+
+/* ── Bottom padding ─────────────────────────────────────── */
+.bottomPad {
+  height: 16px;
+}

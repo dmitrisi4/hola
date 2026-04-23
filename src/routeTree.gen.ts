@@ -17,6 +17,8 @@ import { Route as appProfileRouteImport } from './routes/(app)/profile'
 import { Route as appMatchesRouteImport } from './routes/(app)/matches'
 import { Route as appFeedRouteImport } from './routes/(app)/feed'
 import { Route as appChatsRouteImport } from './routes/(app)/chats'
+import { Route as appProfileIndexRouteImport } from './routes/(app)/profile.index'
+import { Route as appProfileEditRouteImport } from './routes/(app)/profile.edit'
 import { Route as appChatChatIdRouteImport } from './routes/(app)/chat.$chatId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -59,6 +61,16 @@ const appChatsRoute = appChatsRouteImport.update({
   path: '/chats',
   getParentRoute: () => rootRouteImport,
 } as any)
+const appProfileIndexRoute = appProfileIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => appProfileRoute,
+} as any)
+const appProfileEditRoute = appProfileEditRouteImport.update({
+  id: '/edit',
+  path: '/edit',
+  getParentRoute: () => appProfileRoute,
+} as any)
 const appChatChatIdRoute = appChatChatIdRouteImport.update({
   id: '/(app)/chat/$chatId',
   path: '/chat/$chatId',
@@ -70,22 +82,25 @@ export interface FileRoutesByFullPath {
   '/chats': typeof appChatsRoute
   '/feed': typeof appFeedRoute
   '/matches': typeof appMatchesRoute
-  '/profile': typeof appProfileRoute
+  '/profile': typeof appProfileRouteWithChildren
   '/settings': typeof appSettingsRoute
   '/login': typeof authLoginRoute
   '/signup': typeof authSignupRoute
   '/chat/$chatId': typeof appChatChatIdRoute
+  '/profile/edit': typeof appProfileEditRoute
+  '/profile/': typeof appProfileIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/chats': typeof appChatsRoute
   '/feed': typeof appFeedRoute
   '/matches': typeof appMatchesRoute
-  '/profile': typeof appProfileRoute
   '/settings': typeof appSettingsRoute
   '/login': typeof authLoginRoute
   '/signup': typeof authSignupRoute
   '/chat/$chatId': typeof appChatChatIdRoute
+  '/profile/edit': typeof appProfileEditRoute
+  '/profile': typeof appProfileIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -93,11 +108,13 @@ export interface FileRoutesById {
   '/(app)/chats': typeof appChatsRoute
   '/(app)/feed': typeof appFeedRoute
   '/(app)/matches': typeof appMatchesRoute
-  '/(app)/profile': typeof appProfileRoute
+  '/(app)/profile': typeof appProfileRouteWithChildren
   '/(app)/settings': typeof appSettingsRoute
   '/(auth)/login': typeof authLoginRoute
   '/(auth)/signup': typeof authSignupRoute
   '/(app)/chat/$chatId': typeof appChatChatIdRoute
+  '/(app)/profile/edit': typeof appProfileEditRoute
+  '/(app)/profile/': typeof appProfileIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,17 +128,20 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/chat/$chatId'
+    | '/profile/edit'
+    | '/profile/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/chats'
     | '/feed'
     | '/matches'
-    | '/profile'
     | '/settings'
     | '/login'
     | '/signup'
     | '/chat/$chatId'
+    | '/profile/edit'
+    | '/profile'
   id:
     | '__root__'
     | '/'
@@ -133,6 +153,8 @@ export interface FileRouteTypes {
     | '/(auth)/login'
     | '/(auth)/signup'
     | '/(app)/chat/$chatId'
+    | '/(app)/profile/edit'
+    | '/(app)/profile/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -140,7 +162,7 @@ export interface RootRouteChildren {
   appChatsRoute: typeof appChatsRoute
   appFeedRoute: typeof appFeedRoute
   appMatchesRoute: typeof appMatchesRoute
-  appProfileRoute: typeof appProfileRoute
+  appProfileRoute: typeof appProfileRouteWithChildren
   appSettingsRoute: typeof appSettingsRoute
   authLoginRoute: typeof authLoginRoute
   authSignupRoute: typeof authSignupRoute
@@ -205,6 +227,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appChatsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(app)/profile/': {
+      id: '/(app)/profile/'
+      path: '/'
+      fullPath: '/profile/'
+      preLoaderRoute: typeof appProfileIndexRouteImport
+      parentRoute: typeof appProfileRoute
+    }
+    '/(app)/profile/edit': {
+      id: '/(app)/profile/edit'
+      path: '/edit'
+      fullPath: '/profile/edit'
+      preLoaderRoute: typeof appProfileEditRouteImport
+      parentRoute: typeof appProfileRoute
+    }
     '/(app)/chat/$chatId': {
       id: '/(app)/chat/$chatId'
       path: '/chat/$chatId'
@@ -215,12 +251,26 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface appProfileRouteChildren {
+  appProfileEditRoute: typeof appProfileEditRoute
+  appProfileIndexRoute: typeof appProfileIndexRoute
+}
+
+const appProfileRouteChildren: appProfileRouteChildren = {
+  appProfileEditRoute: appProfileEditRoute,
+  appProfileIndexRoute: appProfileIndexRoute,
+}
+
+const appProfileRouteWithChildren = appProfileRoute._addFileChildren(
+  appProfileRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   appChatsRoute: appChatsRoute,
   appFeedRoute: appFeedRoute,
   appMatchesRoute: appMatchesRoute,
-  appProfileRoute: appProfileRoute,
+  appProfileRoute: appProfileRouteWithChildren,
   appSettingsRoute: appSettingsRoute,
   authLoginRoute: authLoginRoute,
   authSignupRoute: authSignupRoute,

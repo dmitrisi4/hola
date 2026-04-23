@@ -1,6 +1,5 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
-import { ProfilePage } from "@/pages/profile/ProfilePage";
 import { getAccessToken } from "@/shared/api/http";
 
 export const Route = createFileRoute("/(app)/profile")({
@@ -13,5 +12,5 @@ export const Route = createFileRoute("/(app)/profile")({
       });
     }
   },
-  component: ProfilePage,
+  component: () => <Outlet />,
 });

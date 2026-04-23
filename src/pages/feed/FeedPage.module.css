@@ -1,13 +1,98 @@
-.grid {
-  max-width: 960px;
-  margin: 0 auto;
-  display: grid;
-  gap: 12px;
+.container {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
 }
 
-.counters {
+.cardWrapper {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Navigation Arrows */
+.navButton,
+.navButtonRight {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #000000;
+  border-radius: 2px;
+  width: 56px;
+  height: 56px;
   display: flex;
-  gap: 12px;
-  font-size: 14px;
-  color: var(--text-secondary, #6b7280);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.navButton {
+  left: 24px;
+}
+
+.navButtonRight {
+  right: 24px;
+}
+
+.navButton:hover,
+.navButtonRight:hover {
+  background: #ffffff;
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Counters */
+.counters {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 2px;
+  backdrop-filter: blur(8px);
+}
+
+.counterItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: center;
+}
+
+.counterValue {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.counterLabel {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #cccccc;
+  text-transform: uppercase;
+}
+
+.counterDivider {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 18px;
+  color: #666666;
 }

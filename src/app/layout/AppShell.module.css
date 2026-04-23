@@ -1,9 +1,16 @@
 .shell {
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   display: grid;
   grid-template-rows: auto 1fr auto;
 }
 
 .main {
+  overflow: hidden;
+  min-height: 0;
   padding: 16px;
+}
+
+.mainScrollable {
+  overflow-y: auto;
 }

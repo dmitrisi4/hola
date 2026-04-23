@@ -6,15 +6,21 @@ export function AppShell({
   title,
   children,
   showBottomNav = true,
+  scrollable = false,
+  onBack,
 }: {
   title?: string
   children: React.ReactNode
   showBottomNav?: boolean
+  scrollable?: boolean
+  onBack?: () => void
 }) {
   return (
     <div className={styles.shell}>
-      <TopBar title={title} />
-      <main className={styles.main}>{children}</main>
+      <TopBar title={title} onBack={onBack} />
+      <main className={`${styles.main} ${scrollable ? styles.mainScrollable : ''}`}>
+        {children}
+      </main>
       {showBottomNav ? <BottomNav /> : null}
     </div>
   )

@@ -27,4 +27,30 @@
 .right {
   color: var(--muted);
   font-size: 12px;
+  min-width: 32px;
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.15s;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.backBtn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.backPlaceholder {
+  width: 32px;
+  flex-shrink: 0;
 }

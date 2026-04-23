@@ -66,3 +66,14 @@ Thumbs.db
 # =========================
 .cache/
 .eslintcache
+
+# =========================
+# AI Agents (local cache / generated context)
+# =========================
+.qwen/
+.aider*
+.continue/
+.codeium/
+.tabnine/
+.copilot/
+.sourcegraph/

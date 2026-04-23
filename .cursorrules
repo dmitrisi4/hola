@@ -1,0 +1,7 @@
+See CLAUDE.md for the full project guide (stack, structure, conventions, commands).
+
+# Cursor-specific notes
+
+- Use TypeScript strict mode — no `any`, no type assertions without a comment explaining why
+- CSS Modules only — className via `styles.xxx`
+- Zod v4: import primitives directly (`object`, `string`, `output`) — not via `z.*` namespace

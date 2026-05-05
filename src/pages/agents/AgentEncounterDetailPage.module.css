@@ -1,0 +1,249 @@
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.avatar {
+  width: 92px;
+  height: 92px;
+  border-radius: var(--radius-20);
+  object-fit: cover;
+}
+
+.heroBody {
+  display: grid;
+  gap: 10px;
+}
+
+.heroEyebrow {
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--emotion);
+}
+
+.heroTitle {
+  margin: 0;
+  font-family: var(--font-family-display);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  line-height: var(--line-height-tight);
+  color: var(--text);
+}
+
+.heroText {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-16);
+  line-height: var(--line-height-relaxed);
+}
+
+.heroMeta,
+.chips,
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.lifecycleGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.metaCard {
+  padding: 16px;
+  border-radius: var(--radius-16);
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel-elevated) 74%, var(--panel-2));
+  display: grid;
+  gap: 10px;
+}
+
+.metaLabel {
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.metaValue {
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text);
+  line-height: var(--line-height-tight);
+}
+
+.lifecycleNotes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  color: var(--text-secondary);
+  font-size: var(--font-size-14);
+}
+
+.transcriptHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.transcriptHint {
+  color: var(--text-secondary);
+  font-size: var(--font-size-14);
+}
+
+.transcript {
+  display: grid;
+  gap: 10px;
+}
+
+.transcriptHiddenCard {
+  padding: 16px;
+  border-radius: var(--radius-16);
+  border: 1px dashed var(--border-strong);
+  background: color-mix(in srgb, var(--panel-elevated) 72%, var(--panel-2));
+  display: grid;
+  gap: 8px;
+}
+
+.messageRow {
+  display: flex;
+}
+
+.messageRowMine {
+  justify-content: flex-end;
+}
+
+.messageRowSystem {
+  justify-content: center;
+}
+
+.messageBubble {
+  max-width: min(540px, 100%);
+  padding: 12px 14px;
+  border-radius: var(--radius-16);
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel-elevated) 74%, var(--panel-2));
+  color: var(--text);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-relaxed);
+}
+
+.messageBubbleMine {
+  border-color: transparent;
+  background: var(--emotion-soft);
+}
+
+.messageBubbleSystem {
+  text-align: center;
+  background: var(--panel-2);
+  color: var(--text-secondary);
+}
+
+.compareGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.compareRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--text-secondary);
+  font-size: var(--font-size-14);
+}
+
+.compareRow strong {
+  color: var(--text);
+  text-align: right;
+}
+
+.notes {
+  display: grid;
+  gap: 10px;
+}
+
+.note {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-relaxed);
+}
+
+.handoff {
+  display: grid;
+  gap: 14px;
+}
+
+.openerPicker {
+  display: grid;
+  gap: 8px;
+}
+
+.opener {
+  margin: 0;
+  font-size: var(--font-size-16);
+  line-height: var(--line-height-relaxed);
+  color: var(--text);
+}
+
+.handoffNotes {
+  display: grid;
+  gap: 6px;
+  color: var(--text-secondary);
+  font-size: var(--font-size-14);
+}
+
+.primaryLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: var(--radius-16);
+  background: var(--emotion);
+  color: var(--emotion-contrast);
+  font-weight: var(--font-weight-semibold);
+}
+
+@media (max-width: 640px) {
+  .hero,
+  .lifecycleGrid,
+  .compareGrid,
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .transcriptHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -23,7 +23,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@backend-types/*": ["../backend/types/*"]
+      "@backend-types/*": ["../backend/types/*", "./types/backend/*"]
     }
   }
 }

@@ -15,6 +15,9 @@ export type { ApiContext, HttpError } from "./http-types";
 let accessToken: string | null = null;
 let refreshPromise: Promise<string> | null = null;
 let refreshTimeoutId: number | null = null;
+const E2E_STORAGE_KEY = "hola_e2e_access_token";
+const CAN_BOOTSTRAP_E2E_TOKEN =
+  import.meta.env.DEV || import.meta.env.VITE_E2E_BOOTSTRAP === "1";
 
 function clearRefreshTimer() {
   if (!refreshTimeoutId) return;
@@ -74,6 +77,21 @@ export function clearAccessToken() {
 }
 
 export function getAccessToken() {
+  if (!accessToken && typeof window !== "undefined" && CAN_BOOTSTRAP_E2E_TOKEN) {
+    try {
+      const tokenFromStorage = window.localStorage.getItem(E2E_STORAGE_KEY);
+      if (tokenFromStorage) {
+        setAccessTokenInternal(tokenFromStorage, { broadcast: false, schedule: false });
+      }
+    } catch {
+      // noop
+    }
+  }
+
+  if (!accessToken && typeof window === "undefined" && import.meta.env.VITE_E2E_BOOTSTRAP === "1") {
+    return "__e2e_bootstrap__";
+  }
+
   return accessToken;
 }
 

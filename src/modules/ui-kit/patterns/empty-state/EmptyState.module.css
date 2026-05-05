@@ -1,0 +1,30 @@
+.state {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  text-align: center;
+}
+
+.compact {
+  padding: 8px 0;
+}
+
+.inner {
+  display: grid;
+  gap: 8px;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-size-20);
+  font-weight: var(--font-weight-bold);
+  color: var(--text);
+}
+
+.text {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: var(--line-height-base);
+  max-width: 36ch;
+}

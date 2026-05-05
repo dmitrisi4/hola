@@ -1,0 +1,45 @@
+.hero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.copy {
+  min-width: 0;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: var(--emotion);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-24);
+  color: var(--text);
+}
+
+.text {
+  margin: 8px 0 0;
+  color: var(--text-secondary);
+  max-width: 54ch;
+  line-height: var(--line-height-relaxed);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    flex-direction: column;
+  }
+}

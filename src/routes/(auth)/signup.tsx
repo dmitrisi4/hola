@@ -1,7 +1,7 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 
-import { getAccessToken } from "@/shared/api/http";
 import { SignupPage } from "@/pages/auth/SignupPage";
+import { getAccessToken } from "@/shared/api/http";
 
 export const Route = createFileRoute("/(auth)/signup")({
   beforeLoad: () => {

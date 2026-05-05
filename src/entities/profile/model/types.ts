@@ -4,4 +4,7 @@ export type Profile = {
   age?: number
   bio?: string
   photos?: string[]
+  location?: string
+  occupation?: string
+  interests?: string[]
 }

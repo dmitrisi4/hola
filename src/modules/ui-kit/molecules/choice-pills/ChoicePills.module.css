@@ -1,0 +1,33 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  padding: 10px 16px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.pill:hover {
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+.active {
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+  background: var(--accent-soft);
+}
+
+.small {
+  padding: 7px 12px;
+  font-size: var(--font-size-12);
+}

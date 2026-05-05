@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "gen:backend-types": "npm --prefix ../backend run gen:types",
+    "gen:backend-types": "node scripts/ensure-backend-types.mjs",
     "predev": "npm run gen:backend-types",
     "prebuild": "npm run gen:backend-types",
     "dev": "vite dev --port 3000",
@@ -16,7 +16,10 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "verify": "npm run lint && npm run test:run && npm run test:e2e && npm run build"
   },
   "dependencies": {
     "@tanstack/react-devtools": "^0.9.3",
@@ -38,6 +41,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
+    "@playwright/test": "^1.59.1",
     "@tanstack/devtools-vite": "^0.4.1",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.9.1",

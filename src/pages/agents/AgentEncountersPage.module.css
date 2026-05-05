@@ -1,0 +1,248 @@
+.page {
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.personaCard {
+  display: grid;
+  gap: 10px;
+}
+
+.personaTitle {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.4rem, 2vw, 1.9rem);
+  line-height: var(--line-height-tight);
+  color: var(--text);
+}
+
+.personaText {
+  margin: 6px 0 0;
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.personaMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.inlineLink {
+  color: var(--accent);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-semibold);
+}
+
+.overviewGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.overviewCard {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-18);
+  background:
+    radial-gradient(circle at top right, var(--emotion-soft) 0%, transparent 28%),
+    color-mix(in srgb, var(--panel) 92%, var(--panel-2));
+  display: grid;
+  gap: 6px;
+}
+
+.overviewLabel {
+  color: var(--text-tertiary);
+  font-size: var(--font-size-12);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: var(--font-weight-semibold);
+}
+
+.overviewValue {
+  color: var(--text);
+  font-size: var(--font-size-20);
+  font-weight: var(--font-weight-semibold);
+}
+
+.overviewText {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-relaxed);
+}
+
+.controls {
+  display: grid;
+  gap: 10px;
+}
+
+.controlHint {
+  color: var(--text-tertiary);
+  font-size: var(--font-size-13);
+}
+
+.encounterList {
+  display: grid;
+  gap: 12px;
+}
+
+.encounterCard {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-20);
+  background:
+    radial-gradient(circle at top right, var(--emotion-soft) 0%, transparent 26%),
+    color-mix(in srgb, var(--panel) 94%, var(--panel-2));
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 120ms ease,
+    border-color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.encounterCard:hover {
+  transform: translateY(-1px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+}
+
+.encounterCardCompact {
+  grid-template-columns: 56px 1fr;
+  padding: 14px;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-16);
+  object-fit: cover;
+}
+
+.encounterBody {
+  display: grid;
+  gap: 12px;
+}
+
+.encounterTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.encounterTitle {
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text);
+}
+
+.encounterSubtitle {
+  margin-top: 6px;
+  color: var(--text-secondary);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-relaxed);
+}
+
+.lifecycleMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-13);
+}
+
+.deltaText {
+  color: var(--text);
+  font-weight: var(--font-weight-medium);
+}
+
+.scoreBlock {
+  display: grid;
+  gap: 2px;
+  min-width: 60px;
+  text-align: right;
+}
+
+.scoreValue {
+  font-size: var(--font-size-24);
+  font-weight: var(--font-weight-bold);
+  color: var(--emotion);
+  line-height: 1;
+}
+
+.scoreLabel {
+  font-size: var(--font-size-12);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.encounterMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.replayList,
+.archiveList {
+  display: grid;
+  gap: 12px;
+}
+
+.replayRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(240px, 0.8fr);
+  gap: 12px;
+}
+
+.replaySummary {
+  padding: 16px;
+  border-radius: var(--radius-18);
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel-elevated) 78%, var(--panel-2));
+  display: grid;
+  align-content: start;
+  gap: 6px;
+}
+
+.replayLabel {
+  color: var(--text-tertiary);
+  font-size: var(--font-size-12);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: var(--font-weight-semibold);
+}
+
+.replayValue {
+  color: var(--text);
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-semibold);
+}
+
+.replayText {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-relaxed);
+}
+
+@media (max-width: 640px) {
+  .overviewGrid,
+  .replayRow,
+  .encounterCard {
+    grid-template-columns: 1fr;
+  }
+
+  .encounterTop {
+    flex-direction: column;
+  }
+
+  .scoreBlock {
+    text-align: left;
+  }
+}

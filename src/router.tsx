@@ -13,5 +13,9 @@ export const getRouter = () => {
     defaultPreloadStaleTime: 0,
   })
 
+  if (typeof window !== 'undefined' && import.meta.env.VITE_E2E_BOOTSTRAP === '1') {
+    ;(window as typeof window & { __holaRouter?: typeof router }).__holaRouter = router
+  }
+
   return router
 }

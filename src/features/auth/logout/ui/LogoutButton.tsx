@@ -1,4 +1,4 @@
-import { Button } from "@/shared/ui/atoms/button/Button";
+import { Button } from "@/modules/ui-kit";
 
 import { useLogout } from "../model/useLogout";
 

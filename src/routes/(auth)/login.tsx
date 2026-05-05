@@ -1,8 +1,8 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { z } from "zod";
 
-import { getAccessToken } from "@/shared/api/http";
 import { LoginPage } from "@/pages/auth/LoginPage";
+import { getAccessToken } from "@/shared/api/http";
 
 const loginSearchSchema = z.object({
   redirect: z.string().optional().catch(undefined),

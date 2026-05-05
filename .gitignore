@@ -23,6 +23,8 @@ out/
 # =========================
 coverage/
 .vitest/
+playwright-report/
+test-results/
 
 # =========================
 # Logs

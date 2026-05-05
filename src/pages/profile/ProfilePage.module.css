@@ -3,16 +3,16 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
 }
 
-/* ── Hero ───────────────────────────────────────────────── */
 .hero {
   position: relative;
-  border-radius: 16px;
+  border-radius: var(--radius-24);
   overflow: hidden;
   aspect-ratio: 3 / 4;
-  background: #1a1a1a;
+  background: var(--panel-2);
+  box-shadow: var(--shadow-md);
 }
 
 .heroPhoto {
@@ -25,7 +25,7 @@
 .heroOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 50%);
+  background: linear-gradient(to top, var(--scrim-strong) 0%, transparent 55%);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -33,15 +33,16 @@
 }
 
 .heroName {
+  font-family: var(--font-family-display);
   font-size: 32px;
-  font-weight: 700;
-  color: #fff;
-  line-height: 1.1;
+  font-weight: var(--font-weight-bold);
+  color: var(--on-media);
+  line-height: var(--line-height-tight);
 }
 
 .heroAge {
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.8);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-media-muted);
 }
 
 .heroLocation {
@@ -49,51 +50,117 @@
   align-items: center;
   gap: 5px;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--on-media-subtle);
   margin-top: 6px;
 }
 
-/* ── Sections ───────────────────────────────────────────── */
+.heroMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.agentCard {
+  display: grid;
+  gap: 12px;
+}
+
+.agentTitle {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.35rem, 2vw, 1.9rem);
+  line-height: var(--line-height-tight);
+  color: var(--text);
+}
+
+.agentText {
+  margin: 6px 0 0;
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.agentMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.agentStats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.agentStat {
+  padding: 12px 14px;
+  border-radius: var(--radius-14);
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel) 88%, var(--panel-2));
+  display: grid;
+  gap: 4px;
+}
+
+.agentStatLabel {
+  color: var(--text-tertiary);
+  font-size: var(--font-size-12);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: var(--font-weight-semibold);
+}
+
+.agentStatValue {
+  color: var(--text);
+  font-size: var(--font-size-15);
+  font-weight: var(--font-weight-semibold);
+}
+
+.agentInsightList {
+  display: grid;
+  gap: 10px;
+}
+
+.agentInsight {
+  padding: 12px 14px;
+  border-radius: var(--radius-14);
+  background: color-mix(in srgb, var(--panel-elevated) 78%, var(--panel-2));
+  border: 1px solid var(--border);
+  display: grid;
+  gap: 4px;
+}
+
+.agentInsightTitle {
+  color: var(--text);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-semibold);
+}
+
+.agentInsightText {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-relaxed);
+}
+
+.agentBtn {
+  width: 100%;
+}
+
 .section {
-  background: #111827;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 16px;
-  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.sectionLabel {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: #6ee7b7;
-}
-
-/* ── Bio ────────────────────────────────────────────────── */
 .bio {
   font-size: 15px;
   line-height: 1.6;
-  color: #c4cfe8;
+  color: var(--text-secondary);
   margin: 0;
 }
 
-/* ── Looking for pill ───────────────────────────────────── */
 .pill {
-  display: inline-flex;
   align-self: flex-start;
-  padding: 8px 16px;
-  border-radius: 100px;
-  border: 1.5px solid #6ee7b7;
-  color: #6ee7b7;
-  font-size: 14px;
-  font-weight: 500;
-  background: rgba(110, 231, 183, 0.08);
 }
 
-/* ── Lifestyle tags ─────────────────────────────────────── */
 .tags {
   display: flex;
   flex-wrap: wrap;
@@ -105,27 +172,26 @@
   flex-direction: column;
   gap: 2px;
   padding: 10px 14px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 12px;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-12);
   min-width: 80px;
 }
 
 .tagLabel {
   font-size: 10px;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   letter-spacing: 0.8px;
   text-transform: uppercase;
-  color: #555f7a;
+  color: var(--text-tertiary);
 }
 
 .tagValue {
   font-size: 14px;
-  font-weight: 500;
-  color: #e8eefc;
+  font-weight: var(--font-weight-medium);
+  color: var(--text);
 }
 
-/* ── Photo grid ─────────────────────────────────────────── */
 .photoGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -133,10 +199,10 @@
 }
 
 .photoSlot {
-  border-radius: 10px;
+  border-radius: var(--radius-12);
   overflow: hidden;
   aspect-ratio: 2 / 3;
-  background: #1a1a1a;
+  background: var(--panel-2);
 }
 
 .gridPhoto {
@@ -146,35 +212,19 @@
   display: block;
 }
 
-/* ── Edit button ────────────────────────────────────────── */
 .editBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 10px;
   width: 100%;
-  padding: 18px 24px;
-  background: #fff;
-  color: #0b0f17;
-  border: none;
-  border-radius: 14px;
   font-size: 15px;
-  font-weight: 700;
   letter-spacing: 0.3px;
-  cursor: pointer;
-  transition: opacity 0.15s, transform 0.15s;
 }
 
-.editBtn:hover {
-  opacity: 0.92;
-  transform: translateY(-1px);
-}
-
-.editBtn:active {
-  transform: translateY(0);
-}
-
-/* ── Bottom padding ─────────────────────────────────────── */
 .bottomPad {
   height: 8px;
+}
+
+@media (max-width: 640px) {
+  .agentStats {
+    grid-template-columns: 1fr;
+  }
 }

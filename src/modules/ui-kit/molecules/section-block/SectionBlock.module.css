@@ -1,0 +1,41 @@
+.section {
+  background:
+    radial-gradient(circle at top right, var(--accent-soft) 0%, transparent 28%),
+    var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-20);
+  box-shadow: var(--shadow-sm);
+}
+
+.content {
+  padding: 20px 16px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.description {
+  margin: 0;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-12);
+  line-height: var(--line-height-base);
+}
+
+.emotion {
+  background:
+    radial-gradient(circle at top right, var(--emotion-soft) 0%, transparent 28%),
+    var(--panel);
+}

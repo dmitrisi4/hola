@@ -1,8 +1,7 @@
 import { useSearch, useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 
-import { Button } from "@/shared/ui/atoms/button/Button";
-import { Input } from "@/shared/ui/atoms/input/Input";
+import { Button, Input } from "@/modules/ui-kit";
 
 import styles from "./LoginForm.module.css";
 import { loginSchema, type LoginFormData } from "../model/loginValidation";

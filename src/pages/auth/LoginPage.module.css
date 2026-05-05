@@ -26,6 +26,37 @@
   font-size: 13px;
 }
 
+.oauthBlock {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.divider::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  border-top: 1px solid color-mix(in srgb, var(--border) 88%, white 12%);
+}
+
+.divider span {
+  position: relative;
+  padding: 0 10px;
+  background: var(--panel);
+}
+
 .row {
   display: flex;
   gap: 10px;

@@ -1,0 +1,627 @@
+.page {
+  min-height: 100%;
+  background:
+    radial-gradient(circle at top left, var(--accent-soft) 0%, transparent 28%),
+    radial-gradient(circle at top right, var(--emotion-soft) 0%, transparent 24%),
+    var(--bg);
+}
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 32px 20px 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.8fr);
+  gap: 20px;
+}
+
+.heroBody {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--accent);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-family-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: var(--line-height-tight);
+  color: var(--text);
+}
+
+.subtitle {
+  margin: 0;
+  max-width: 58ch;
+  color: var(--text-secondary);
+  font-size: var(--font-size-16);
+  line-height: var(--line-height-relaxed);
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: var(--font-size-20);
+  color: var(--text);
+}
+
+.sectionText {
+  margin: 4px 0 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-base);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.fieldStack {
+  display: grid;
+  gap: 12px;
+}
+
+.preferenceStack,
+.choiceStack,
+.settingsDemo,
+.emptyDemo {
+  display: grid;
+}
+
+.discoveryShowcase {
+  display: grid;
+  gap: 16px;
+}
+
+.discoveryRail {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-20);
+  background:
+    radial-gradient(circle at top right, var(--emotion-soft) 0%, transparent 26%),
+    color-mix(in srgb, var(--panel) 92%, var(--panel-2));
+}
+
+.discoveryCopy {
+  display: grid;
+  gap: 8px;
+  max-width: 38rem;
+}
+
+.discoveryEyebrow {
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--emotion);
+}
+
+.discoveryTitle {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  line-height: var(--line-height-tight);
+  color: var(--text);
+}
+
+.discoveryText {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-relaxed);
+}
+
+.discoveryProgress {
+  display: grid;
+  gap: 8px;
+}
+
+.discoveryProgressMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.discoveryProgressLabel {
+  font-size: var(--font-size-12);
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.discoveryProgressValue {
+  font-size: var(--font-size-12);
+  color: var(--emotion);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.discoveryTrack {
+  width: 100%;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--border-strong) 68%, transparent);
+  overflow: hidden;
+}
+
+.discoveryFill {
+  display: block;
+  width: 38%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--emotion) 100%);
+}
+
+.discoveryMeta {
+  display: grid;
+  gap: 10px;
+  justify-items: end;
+}
+
+.discoveryCounters {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--panel) 94%, transparent);
+}
+
+.discoveryCounter {
+  display: grid;
+  gap: 2px;
+  text-align: center;
+}
+
+.discoveryCounterValue {
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-bold);
+  color: var(--text);
+  line-height: 1;
+}
+
+.discoveryCounterLabel {
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-tertiary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.discoveryDivider {
+  width: 1px;
+  height: 22px;
+  background: var(--border-strong);
+}
+
+.discoveryCard {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-24);
+  background: var(--panel);
+  box-shadow: var(--shadow-sm);
+}
+
+.discoveryPhoto {
+  min-height: 260px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background:
+    linear-gradient(to top, var(--scrim-strong) 0%, transparent 50%),
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-soft) 72%, transparent) 0%, color-mix(in srgb, var(--emotion-soft) 80%, transparent) 100%),
+    var(--panel-2);
+}
+
+.discoveryPhotoMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.discoveryPhotoCaption {
+  color: var(--on-media-muted);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-medium);
+}
+
+.discoveryBody {
+  display: grid;
+  gap: 10px;
+  padding: 18px;
+  background:
+    radial-gradient(circle at top right, var(--accent-soft) 0%, transparent 22%),
+    linear-gradient(180deg, color-mix(in srgb, var(--panel) 90%, var(--panel-2)) 0%, var(--panel) 100%);
+}
+
+.discoveryIdentity {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  line-height: var(--line-height-tight);
+  color: var(--text);
+}
+
+.discoverySubline {
+  font-size: var(--font-size-16);
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.discoveryDescription {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-relaxed);
+}
+
+.discoveryTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.discoveryActions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 12px;
+  align-items: center;
+  padding: 16px 18px 18px;
+  border-top: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel) 88%, var(--panel-2));
+}
+
+.discoveryActionCopy {
+  display: grid;
+  gap: 4px;
+}
+
+.discoveryActionTitle {
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text);
+}
+
+.discoveryActionHint {
+  font-size: var(--font-size-12);
+  line-height: var(--line-height-base);
+  color: var(--text-tertiary);
+}
+
+.settingsDemo {
+  gap: 0;
+}
+
+.emptyDemo {
+  min-height: 180px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-16);
+  background: color-mix(in srgb, var(--panel-2) 88%, transparent);
+}
+
+.label {
+  display: block;
+  color: var(--text-secondary);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.tokenGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.swatch {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.colorBox {
+  height: 76px;
+  border-radius: var(--radius-16);
+  border: 1px solid var(--border);
+}
+
+.tokenName {
+  color: var(--text);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-semibold);
+}
+
+.tokenValue {
+  color: var(--text-tertiary);
+  font-size: var(--font-size-12);
+}
+
+.typeStack {
+  display: grid;
+  gap: 14px;
+}
+
+.display {
+  font-family: var(--font-family-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: var(--line-height-tight);
+  color: var(--text);
+}
+
+.h2 {
+  font-size: var(--font-size-24);
+  font-weight: var(--font-weight-bold);
+  color: var(--text);
+}
+
+.body {
+  font-size: var(--font-size-16);
+  line-height: var(--line-height-relaxed);
+  color: var(--text-secondary);
+}
+
+.caption {
+  font-size: var(--font-size-12);
+  color: var(--text-tertiary);
+}
+
+.cardRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.miniCard {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-16);
+  background: var(--panel-2);
+  padding: 16px;
+}
+
+.miniTitle {
+  margin: 0 0 8px;
+  color: var(--text);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-semibold);
+}
+
+.miniText {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-base);
+}
+
+.threadShowcase,
+.snapshotShowcase {
+  display: grid;
+  gap: 14px;
+}
+
+.threadShowcase {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-20);
+  background:
+    radial-gradient(circle at top right, var(--emotion-soft) 0%, transparent 28%),
+    color-mix(in srgb, var(--panel) 92%, var(--panel-2));
+  overflow: hidden;
+}
+
+.threadHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 16px 0;
+}
+
+.threadIdentity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.threadAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--accent-soft) 0%, var(--emotion-soft) 100%);
+  border: 1px solid var(--border);
+}
+
+.threadMeta {
+  display: grid;
+  gap: 2px;
+}
+
+.threadTitle {
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text);
+}
+
+.threadStatus {
+  font-size: var(--font-size-12);
+  color: var(--text-secondary);
+}
+
+.threadMessages {
+  display: grid;
+  gap: 10px;
+  padding: 0 16px;
+}
+
+.messageRow {
+  display: flex;
+}
+
+.messageRowMine {
+  justify-content: flex-end;
+}
+
+.messageBubble {
+  max-width: 80%;
+  padding: 12px 14px;
+  border-radius: var(--radius-16);
+  background: color-mix(in srgb, var(--panel-elevated) 74%, var(--panel-2));
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-base);
+}
+
+.messageBubbleMine {
+  background: var(--emotion-soft);
+  border-color: transparent;
+}
+
+.threadComposer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  padding: 0 16px 16px;
+}
+
+.snapshotHero {
+  min-height: 210px;
+  border-radius: var(--radius-20);
+  overflow: hidden;
+  background:
+    linear-gradient(to top, var(--scrim-strong) 0%, transparent 56%),
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-soft) 72%, transparent) 0%, color-mix(in srgb, var(--emotion-soft) 80%, transparent) 100%),
+    var(--panel-2);
+  display: flex;
+  align-items: flex-end;
+}
+
+.snapshotOverlay {
+  width: 100%;
+  padding: 18px;
+  display: grid;
+  gap: 4px;
+}
+
+.snapshotName {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+  color: var(--on-media);
+  line-height: var(--line-height-tight);
+}
+
+.snapshotLocation {
+  color: var(--on-media-muted);
+  font-size: var(--font-size-14);
+}
+
+.snapshotMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.snapshotCards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.snapshotCard {
+  padding: 14px 16px;
+  border-radius: var(--radius-16);
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel-elevated) 74%, var(--panel-2));
+  display: grid;
+  gap: 6px;
+}
+
+.snapshotLabel {
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.snapshotValue {
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text);
+}
+
+@media (max-width: 900px) {
+  .hero,
+  .grid,
+  .cardRow,
+  .tokenGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .discoveryRail {
+    flex-direction: column;
+  }
+
+  .discoveryActions {
+    grid-template-columns: 1fr;
+  }
+
+  .discoveryMeta {
+    justify-items: start;
+  }
+
+  .container {
+    padding: 24px 16px 40px;
+  }
+
+  .threadComposer,
+  .snapshotCards {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,7 +1,5 @@
 import {
-  createContext,
   useCallback,
-  useContext,
   useEffect,
   useMemo,
   useRef,
@@ -11,21 +9,9 @@ import {
 import { clearAccessToken, getAccessToken, setAccessToken } from "@/shared/api/http";
 import { http } from "@/shared/api/http";
 
+import { AuthContext, type AuthContextValue } from "./useAuth";
+
 import type { AuthAccess } from "@backend-types/rest";
-
-type AuthState = {
-  userId: string | null;
-  isAuthenticated: boolean;
-  isLoading: boolean;
-};
-
-type AuthContextValue = AuthState & {
-  login: (accessToken: string, userId: string) => void;
-  logout: () => Promise<void>;
-  refreshSession: () => Promise<void>;
-};
-
-const AuthContext = createContext<AuthContextValue | null>(null);
 
 const STORAGE_KEY = "hola_user_id";
 
@@ -136,12 +122,4 @@ async function refreshAccessInternal(): Promise<string> {
     storeUserId(response.data.userId);
   }
   return response.data.accessToken;
-}
-
-export function useAuth(): AuthContextValue {
-  const ctx = useContext(AuthContext);
-  if (!ctx) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return ctx;
 }

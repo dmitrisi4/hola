@@ -1,62 +1,206 @@
 .container {
-  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 12px;
   height: 100%;
   overflow: hidden;
+}
+
+.summaryPanel {
+  position: relative;
+  z-index: 1;
+}
+
+.summaryHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.summaryCopy {
+  display: grid;
+  gap: 8px;
+  max-width: 44rem;
+}
+
+.summaryEyebrow {
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.summaryTitle {
+  margin: 0;
+  font-family: var(--font-family-display);
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  line-height: var(--line-height-tight);
+  color: var(--text);
+}
+
+.summaryText {
+  margin: 0;
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-relaxed);
+  color: var(--text-secondary);
+}
+
+.summaryMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.discoveryStage {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 12px;
+  padding: 14px;
+  border-radius: var(--radius-24);
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(circle at top right, var(--emotion-soft) 0%, transparent 24%),
+    linear-gradient(180deg, color-mix(in srgb, var(--panel) 92%, var(--panel-2)) 0%, var(--panel) 100%);
+  box-shadow: var(--shadow-sm);
+}
+
+.stageRail {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.stageCopy {
+  display: grid;
+  gap: 6px;
+  max-width: 30rem;
+}
+
+.stageEyebrow {
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--emotion);
+}
+
+.stageText {
+  margin: 0;
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-base);
+  color: var(--text-secondary);
+}
+
+.progressBlock {
+  display: grid;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.progressMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.progressLabel {
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+}
+
+.progressValue {
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--emotion);
+}
+
+.progressTrack {
+  width: 100%;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--border-strong) 68%, transparent);
+  overflow: hidden;
+}
+
+.progressFill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--emotion) 100%);
+}
+
+.stageActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .cardWrapper {
   height: 100%;
+  min-height: 0;
   overflow: hidden;
 }
 
-/* Navigation Arrows */
-.navButton,
 .navButtonRight {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  background: rgba(255, 255, 255, 0.9);
-  border: 2px solid #000000;
-  border-radius: 2px;
-  width: 56px;
-  height: 56px;
+  background: color-mix(in srgb, var(--panel-elevated) 96%, transparent);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-16);
+  min-height: 52px;
+  padding: 0 16px;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  color: var(--text);
+  transition:
+    background 120ms ease,
+    border-color 120ms ease,
+    transform 120ms ease,
+    box-shadow 120ms ease;
+  box-shadow: var(--shadow-sm);
 }
 
-.navButton {
-  left: 24px;
+.skipLabel {
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
-.navButtonRight {
-  right: 24px;
-}
-
-.navButton:hover,
 .navButtonRight:hover {
-  background: #ffffff;
-  transform: translateY(-50%) scale(1.05);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  background: var(--panel-elevated);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
-/* Counters */
+.navButtonRight:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-md), var(--shadow-focus) var(--accent-soft);
+}
+
 .counters {
-  position: absolute;
-  top: 16px;
-  right: 24px;
-  z-index: 10;
   display: flex;
   align-items: center;
   gap: 16px;
   padding: 12px 20px;
-  background: rgba(0, 0, 0, 0.8);
-  border-radius: 2px;
-  backdrop-filter: blur(8px);
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-sm);
 }
 
 .counterItem {
@@ -67,32 +211,91 @@
 }
 
 .counterValue {
-  font-size: 18px;
-  font-weight: 700;
-  color: #ffffff;
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-bold);
+  color: var(--text);
   line-height: 1;
 }
 
 .counterLabel {
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  color: #cccccc;
+  font-size: 0.625rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
   text-transform: uppercase;
 }
 
 .counterDivider {
   width: 1px;
   height: 24px;
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--border-strong);
 }
 
-/* Empty State */
 .emptyState {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  font-size: 18px;
-  color: #666666;
+  height: 100%;
+  font-size: var(--font-size-18);
+  color: var(--text-secondary);
+}
+
+@media (max-width: 900px) {
+  .summaryHeader {
+    flex-direction: column;
+  }
+
+  .summaryMeta {
+    justify-content: flex-start;
+  }
+
+  .stageRail {
+    flex-direction: column;
+  }
+
+  .stageActions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    gap: 10px;
+  }
+
+  .discoveryStage {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .progressMeta {
+    gap: 8px;
+  }
+
+  .cardWrapper {
+    min-height: 0;
+  }
+
+  .navButtonRight {
+    min-height: 46px;
+    padding: 0 14px;
+  }
+
+  .navButtonRight:hover {
+    transform: translateY(-1px);
+  }
+
+  .counters {
+    padding: 10px 12px;
+    gap: 12px;
+  }
+
+  .counterValue {
+    font-size: 16px;
+  }
+
+  .emptyState {
+    min-height: 240px;
+    font-size: 16px;
+  }
 }

@@ -1,0 +1,10 @@
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-20);
+  box-shadow: var(--shadow-sm);
+}
+
+.content {
+  padding: 20px;
+}

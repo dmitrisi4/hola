@@ -1,0 +1,35 @@
+.segmented {
+  display: flex;
+  background: var(--panel-2);
+  border-radius: var(--radius-12);
+  padding: 3px;
+  gap: 2px;
+}
+
+.button {
+  flex: 1;
+  padding: 7px 12px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.button:hover {
+  color: var(--text);
+}
+
+.button:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus) var(--accent-soft);
+}
+
+.active {
+  background: var(--panel-elevated);
+  color: var(--accent);
+  font-weight: var(--font-weight-semibold);
+}

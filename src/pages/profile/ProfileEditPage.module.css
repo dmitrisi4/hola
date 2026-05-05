@@ -3,10 +3,9 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
-/* ── Photo grid ────────────────────────────────────────── */
 .photoGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -18,25 +17,26 @@
   grid-column: 1 / 3;
   grid-row: 1 / 3;
   position: relative;
-  border-radius: 12px;
+  border-radius: var(--radius-16);
   overflow: hidden;
-  background: #1a1a1a;
+  background: var(--panel-2);
   aspect-ratio: 5 / 6;
+  box-shadow: var(--shadow-md);
 }
 
 .photoSlot {
-  border-radius: 12px;
+  border-radius: var(--radius-16);
   overflow: hidden;
-  background: #1a1a1a;
+  background: var(--panel-2);
   aspect-ratio: 5 / 6;
   position: relative;
+  box-shadow: var(--shadow-sm);
 }
 
-/* ── Photo hover overlay ────────────────────────────────── */
 .photoOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: color-mix(in srgb, var(--scrim) 100%, transparent);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,44 +52,44 @@
   gap: 5px;
   width: 100%;
   padding: 7px 6px;
-  border-radius: 8px;
+  border-radius: var(--radius-12);
   border: none;
-  background: rgba(255, 255, 255, 0.18);
-  color: #fff;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
+  background: color-mix(in srgb, var(--panel) 30%, transparent);
+  color: var(--on-media-muted);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.02em;
   cursor: pointer;
   backdrop-filter: blur(4px);
   transition: background 0.15s;
 }
 
 .overlayBtn:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: color-mix(in srgb, var(--panel) 45%, transparent);
 }
 
 .overlayBtnDanger {
-  background: rgba(220, 38, 38, 0.55);
+  background: color-mix(in srgb, var(--error) 64%, transparent);
 }
 
 .overlayBtnDanger:hover {
-  background: rgba(220, 38, 38, 0.75);
+  background: color-mix(in srgb, var(--error) 78%, transparent);
 }
 
 .photoSlotEmpty {
-  border: 2px dashed rgba(255, 255, 255, 0.12);
+  border: 2px dashed var(--border-strong);
   background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.25);
+  color: var(--text-tertiary);
   cursor: pointer;
   transition: border-color 0.2s, color 0.2s;
 }
 
 .photoSlotEmpty:hover {
-  border-color: rgba(255, 255, 255, 0.3);
-  color: rgba(255, 255, 255, 0.5);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .photo {
@@ -106,9 +106,9 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.6);
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
-  color: #fff;
+  background: color-mix(in srgb, var(--scrim-strong) 82%, transparent);
+  border: 1.5px solid color-mix(in srgb, var(--on-media) 22%, transparent);
+  color: var(--on-media);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -118,37 +118,22 @@
 }
 
 .photoEditBtn:hover {
-  background: rgba(0, 0, 0, 0.8);
+  background: color-mix(in srgb, var(--scrim-strong) 100%, transparent);
 }
 
-/* ── Section ────────────────────────────────────────────── */
 .section {
-  background: #111827;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 16px;
-  padding: 20px 16px;
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.sectionTitle {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: #6ee7b7;
-  margin: 0 0 12px;
-}
-
-/* ── Fields ─────────────────────────────────────────────── */
 .field {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   min-height: 48px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--border);
   padding: 6px 0;
 }
 
@@ -162,30 +147,12 @@
   gap: 10px;
 }
 
-.fieldRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
 .fieldLabel {
   font-size: 13px;
-  font-weight: 600;
-  color: #9aa8c7;
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
   letter-spacing: 0.3px;
   white-space: nowrap;
-}
-
-.fieldHint {
-  font-size: 12px;
-  color: #555f7a;
-  margin: 4px 0 0;
-}
-
-.fieldMuted {
-  font-size: 13px;
-  color: #6b7694;
 }
 
 .fieldValue {
@@ -193,7 +160,7 @@
   align-items: center;
   gap: 8px;
   font-size: 15px;
-  color: #e8eefc;
+  color: var(--text);
   background: none;
   border: none;
   cursor: pointer;
@@ -203,7 +170,7 @@
 }
 
 .fieldValue:hover {
-  color: #ffffff;
+  color: var(--accent);
 }
 
 .fieldValueBio {
@@ -211,7 +178,7 @@
   align-items: flex-start;
   font-size: 14px;
   line-height: 1.5;
-  color: #c4cfe8;
+  color: var(--text-secondary);
 }
 
 .fieldEdit {
@@ -223,19 +190,20 @@
 
 .fieldInput {
   flex: 1;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 8px;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-12);
   padding: 8px 12px;
   font-size: 15px;
-  color: #e8eefc;
+  color: var(--text);
   outline: none;
   font-family: inherit;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .fieldInput:focus {
-  border-color: #6ee7b7;
+  border-color: var(--accent);
+  box-shadow: var(--shadow-focus) var(--accent-soft);
 }
 
 .fieldTextarea {
@@ -245,72 +213,52 @@
 
 .fieldSave {
   padding: 8px 16px;
-  background: #6ee7b7;
-  color: #0b0f17;
+  background: var(--accent);
+  color: var(--accent-contrast);
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-12);
   font-size: 13px;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   cursor: pointer;
   white-space: nowrap;
   transition: background 0.2s;
 }
 
 .fieldSave:hover {
-  background: #4fd3a0;
+  background: var(--accent-hover);
 }
 
-/* ── Chips ──────────────────────────────────────────────── */
-.chipGrid {
+.actionsSection {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-direction: column;
 }
 
-.chip {
-  padding: 10px 16px;
-  border-radius: 100px;
-  border: 1.5px solid rgba(255, 255, 255, 0.12);
-  background: transparent;
-  color: #9aa8c7;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.15s;
+.actions {
+  display: flex;
+  gap: 12px;
 }
 
-.chip:hover {
-  border-color: rgba(255, 255, 255, 0.25);
-  color: #e8eefc;
+.actions > * {
+  flex: 1;
 }
 
-.chipActive {
-  border-color: #6ee7b7 !important;
-  color: #6ee7b7 !important;
-  background: rgba(110, 231, 183, 0.08);
+.saveHint {
+  margin: 12px 0 0;
+  font-size: var(--font-size-12);
+  line-height: 1.5;
+  color: var(--text-tertiary);
 }
 
-.chipSm {
-  padding: 7px 12px;
-  border-radius: 100px;
-  border: 1.5px solid rgba(255, 255, 255, 0.1);
-  background: transparent;
-  color: #9aa8c7;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.15s;
+.statusMessage {
+  min-height: 18px;
+  margin: 12px 0 0;
+  font-size: var(--font-size-12);
+  color: var(--accent);
 }
 
-.chipSm:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  color: #e8eefc;
-}
-
-/* ── Lifestyle rows ─────────────────────────────────────── */
 .lifestyleRow {
   padding: 10px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -323,194 +271,36 @@
 
 .lifestyleLabel {
   font-size: 13px;
-  font-weight: 600;
-  color: #9aa8c7;
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
 }
 
 .lifestyleChips {
-  display: flex;
-  flex-wrap: wrap;
   gap: 6px;
 }
 
-/* ── Segmented control ──────────────────────────────────── */
-.segmented {
-  display: flex;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
-  padding: 3px;
-  gap: 2px;
-}
-
-.segmentBtn {
-  flex: 1;
-  padding: 7px 12px;
-  border: none;
-  border-radius: 6px;
-  background: transparent;
-  color: #9aa8c7;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.segmentActive {
-  background: #1e2a3a;
-  color: #6ee7b7;
-  font-weight: 600;
-}
-
-/* ── Range sliders ──────────────────────────────────────── */
-.rangeRow {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.rangeLabel {
-  font-size: 12px;
-  color: #555f7a;
-  width: 24px;
-  flex-shrink: 0;
-}
-
-.range {
-  flex: 1;
-  -webkit-appearance: none;
-  appearance: none;
-  height: 4px;
-  border-radius: 2px;
-  background: rgba(255, 255, 255, 0.1);
-  outline: none;
-  cursor: pointer;
-}
-
-.range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #6ee7b7;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(110, 231, 183, 0.4);
-}
-
-.range::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #6ee7b7;
-  cursor: pointer;
-  border: none;
-}
-
-.rangeValue {
-  font-size: 12px;
-  color: #9aa8c7;
-  min-width: 36px;
-  text-align: right;
-}
-
-/* ── Toggle ─────────────────────────────────────────────── */
-.toggle {
-  flex-shrink: 0;
-  width: 48px;
-  height: 28px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  cursor: pointer;
-  position: relative;
-  transition: background 0.2s;
-  padding: 0;
-}
-
-.toggleOn {
-  background: #6ee7b7;
-}
-
-.toggleThumb {
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: #fff;
-  transition: transform 0.2s;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-}
-
-.toggleOn .toggleThumb {
-  transform: translateX(20px);
-}
-
-/* ── Settings list ──────────────────────────────────────── */
-.settingsList {
-  display: flex;
-  flex-direction: column;
-}
-
-.settingsRow {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  background: none;
-  border-left: none;
-  border-right: none;
-  border-top: none;
-  cursor: pointer;
-  color: #e8eefc;
-  text-align: left;
-  transition: opacity 0.15s;
-  border-radius: 0;
-  width: 100%;
-}
-
-.settingsRow:last-child {
-  border-bottom: none;
-}
-
-.settingsRow:hover {
-  opacity: 0.75;
-}
-
-.settingsIcon {
-  display: flex;
-  align-items: center;
-  color: #9aa8c7;
-  flex-shrink: 0;
-}
-
-.settingsLabel {
-  flex: 1;
-  font-size: 15px;
-  font-weight: 500;
-}
-
-.settingsValue {
-  font-size: 13px;
-  color: #555f7a;
-}
-
-.chevron {
-  color: #555f7a;
-  flex-shrink: 0;
-}
-
-.danger .settingsLabel {
-  color: #f87171;
-}
-
-.danger .settingsIcon {
-  color: #f87171;
-}
-
-/* ── Bottom padding ─────────────────────────────────────── */
 .bottomPad {
-  height: 16px;
+  height: 8px;
+}
+
+@media (max-width: 640px) {
+  .photoGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .photoMain {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+
+  .field,
+  .fieldEdit,
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .fieldValue {
+    justify-content: space-between;
+  }
 }

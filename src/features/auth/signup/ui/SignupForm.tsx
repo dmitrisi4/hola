@@ -1,8 +1,7 @@
 import { Link, useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 
-import { Button } from "@/shared/ui/atoms/button/Button";
-import { Input } from "@/shared/ui/atoms/input/Input";
+import { Button, Input } from "@/modules/ui-kit";
 
 import { PasswordStrengthMeter } from "./PasswordStrengthMeter";
 import styles from "./SignupForm.module.css";

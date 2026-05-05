@@ -1,7 +1,7 @@
 import { Link, useRouter } from "@tanstack/react-router";
 import { useEffect } from "react";
 
-import { useAuth } from "@/app/providers/AuthProvider";
+import { useAuth } from "@/app/providers/useAuth";
 
 import styles from "./LandingPage.module.css";
 
@@ -19,7 +19,7 @@ export function LandingPage() {
     return (
       <div className={styles.wrap}>
         <div className={styles.card}>
-          <p>Loading…</p>
+          <p>Checking your session…</p>
         </div>
       </div>
     );
@@ -29,7 +29,7 @@ export function LandingPage() {
     return (
       <div className={styles.wrap}>
         <div className={styles.card}>
-          <p>Redirecting…</p>
+          <p>Opening your feed…</p>
         </div>
       </div>
     );
@@ -77,13 +77,13 @@ export function LandingPage() {
             to="/signup"
             className={styles.primaryBtn}
           >
-            Get Started
+            Create Account
           </Link>
           <Link
             to="/login"
             className={styles.secondaryBtn}
           >
-            Sign In
+            Log In
           </Link>
         </div>
       </div>

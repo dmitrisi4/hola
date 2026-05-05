@@ -1,0 +1,61 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  cursor: pointer;
+  color: var(--text);
+  text-align: left;
+  transition: opacity 0.15s;
+  border-radius: 0;
+  width: 100%;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.row:hover {
+  opacity: 0.75;
+}
+
+.static {
+  cursor: default;
+}
+
+.static:hover {
+  opacity: 1;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.label {
+  flex: 1;
+  font-size: 15px;
+  font-weight: var(--font-weight-medium);
+}
+
+.value {
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+.chevron {
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+}
+
+.danger .label,
+.danger .icon {
+  color: var(--error);
+}

@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as UiKitRouteImport } from './routes/ui-kit'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as authSignupRouteImport } from './routes/(auth)/signup'
 import { Route as authLoginRouteImport } from './routes/(auth)/login'
@@ -17,10 +18,20 @@ import { Route as appProfileRouteImport } from './routes/(app)/profile'
 import { Route as appMatchesRouteImport } from './routes/(app)/matches'
 import { Route as appFeedRouteImport } from './routes/(app)/feed'
 import { Route as appChatsRouteImport } from './routes/(app)/chats'
+import { Route as appAgentsRouteImport } from './routes/(app)/agents'
+import { Route as appAgentPersonaRouteImport } from './routes/(app)/agent-persona'
 import { Route as appProfileIndexRouteImport } from './routes/(app)/profile.index'
+import { Route as appAgentsIndexRouteImport } from './routes/(app)/agents.index'
+import { Route as authAuthSuccessRouteImport } from './routes/(auth)/auth/success'
 import { Route as appProfileEditRouteImport } from './routes/(app)/profile.edit'
 import { Route as appChatChatIdRouteImport } from './routes/(app)/chat.$chatId'
+import { Route as appAgentsEncounterIdRouteImport } from './routes/(app)/agents.$encounterId'
 
+const UiKitRoute = UiKitRouteImport.update({
+  id: '/ui-kit',
+  path: '/ui-kit',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -61,10 +72,30 @@ const appChatsRoute = appChatsRouteImport.update({
   path: '/chats',
   getParentRoute: () => rootRouteImport,
 } as any)
+const appAgentsRoute = appAgentsRouteImport.update({
+  id: '/(app)/agents',
+  path: '/agents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const appAgentPersonaRoute = appAgentPersonaRouteImport.update({
+  id: '/(app)/agent-persona',
+  path: '/agent-persona',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const appProfileIndexRoute = appProfileIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => appProfileRoute,
+} as any)
+const appAgentsIndexRoute = appAgentsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => appAgentsRoute,
+} as any)
+const authAuthSuccessRoute = authAuthSuccessRouteImport.update({
+  id: '/(auth)/auth/success',
+  path: '/auth/success',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const appProfileEditRoute = appProfileEditRouteImport.update({
   id: '/edit',
@@ -76,9 +107,17 @@ const appChatChatIdRoute = appChatChatIdRouteImport.update({
   path: '/chat/$chatId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const appAgentsEncounterIdRoute = appAgentsEncounterIdRouteImport.update({
+  id: '/$encounterId',
+  path: '/$encounterId',
+  getParentRoute: () => appAgentsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ui-kit': typeof UiKitRoute
+  '/agent-persona': typeof appAgentPersonaRoute
+  '/agents': typeof appAgentsRouteWithChildren
   '/chats': typeof appChatsRoute
   '/feed': typeof appFeedRoute
   '/matches': typeof appMatchesRoute
@@ -86,25 +125,36 @@ export interface FileRoutesByFullPath {
   '/settings': typeof appSettingsRoute
   '/login': typeof authLoginRoute
   '/signup': typeof authSignupRoute
+  '/agents/$encounterId': typeof appAgentsEncounterIdRoute
   '/chat/$chatId': typeof appChatChatIdRoute
   '/profile/edit': typeof appProfileEditRoute
+  '/auth/success': typeof authAuthSuccessRoute
+  '/agents/': typeof appAgentsIndexRoute
   '/profile/': typeof appProfileIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ui-kit': typeof UiKitRoute
+  '/agent-persona': typeof appAgentPersonaRoute
   '/chats': typeof appChatsRoute
   '/feed': typeof appFeedRoute
   '/matches': typeof appMatchesRoute
   '/settings': typeof appSettingsRoute
   '/login': typeof authLoginRoute
   '/signup': typeof authSignupRoute
+  '/agents/$encounterId': typeof appAgentsEncounterIdRoute
   '/chat/$chatId': typeof appChatChatIdRoute
   '/profile/edit': typeof appProfileEditRoute
+  '/auth/success': typeof authAuthSuccessRoute
+  '/agents': typeof appAgentsIndexRoute
   '/profile': typeof appProfileIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ui-kit': typeof UiKitRoute
+  '/(app)/agent-persona': typeof appAgentPersonaRoute
+  '/(app)/agents': typeof appAgentsRouteWithChildren
   '/(app)/chats': typeof appChatsRoute
   '/(app)/feed': typeof appFeedRoute
   '/(app)/matches': typeof appMatchesRoute
@@ -112,14 +162,20 @@ export interface FileRoutesById {
   '/(app)/settings': typeof appSettingsRoute
   '/(auth)/login': typeof authLoginRoute
   '/(auth)/signup': typeof authSignupRoute
+  '/(app)/agents/$encounterId': typeof appAgentsEncounterIdRoute
   '/(app)/chat/$chatId': typeof appChatChatIdRoute
   '/(app)/profile/edit': typeof appProfileEditRoute
+  '/(auth)/auth/success': typeof authAuthSuccessRoute
+  '/(app)/agents/': typeof appAgentsIndexRoute
   '/(app)/profile/': typeof appProfileIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/ui-kit'
+    | '/agent-persona'
+    | '/agents'
     | '/chats'
     | '/feed'
     | '/matches'
@@ -127,24 +183,35 @@ export interface FileRouteTypes {
     | '/settings'
     | '/login'
     | '/signup'
+    | '/agents/$encounterId'
     | '/chat/$chatId'
     | '/profile/edit'
+    | '/auth/success'
+    | '/agents/'
     | '/profile/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/ui-kit'
+    | '/agent-persona'
     | '/chats'
     | '/feed'
     | '/matches'
     | '/settings'
     | '/login'
     | '/signup'
+    | '/agents/$encounterId'
     | '/chat/$chatId'
     | '/profile/edit'
+    | '/auth/success'
+    | '/agents'
     | '/profile'
   id:
     | '__root__'
     | '/'
+    | '/ui-kit'
+    | '/(app)/agent-persona'
+    | '/(app)/agents'
     | '/(app)/chats'
     | '/(app)/feed'
     | '/(app)/matches'
@@ -152,13 +219,19 @@ export interface FileRouteTypes {
     | '/(app)/settings'
     | '/(auth)/login'
     | '/(auth)/signup'
+    | '/(app)/agents/$encounterId'
     | '/(app)/chat/$chatId'
     | '/(app)/profile/edit'
+    | '/(auth)/auth/success'
+    | '/(app)/agents/'
     | '/(app)/profile/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  UiKitRoute: typeof UiKitRoute
+  appAgentPersonaRoute: typeof appAgentPersonaRoute
+  appAgentsRoute: typeof appAgentsRouteWithChildren
   appChatsRoute: typeof appChatsRoute
   appFeedRoute: typeof appFeedRoute
   appMatchesRoute: typeof appMatchesRoute
@@ -167,10 +240,18 @@ export interface RootRouteChildren {
   authLoginRoute: typeof authLoginRoute
   authSignupRoute: typeof authSignupRoute
   appChatChatIdRoute: typeof appChatChatIdRoute
+  authAuthSuccessRoute: typeof authAuthSuccessRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/ui-kit': {
+      id: '/ui-kit'
+      path: '/ui-kit'
+      fullPath: '/ui-kit'
+      preLoaderRoute: typeof UiKitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -227,12 +308,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appChatsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(app)/agents': {
+      id: '/(app)/agents'
+      path: '/agents'
+      fullPath: '/agents'
+      preLoaderRoute: typeof appAgentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(app)/agent-persona': {
+      id: '/(app)/agent-persona'
+      path: '/agent-persona'
+      fullPath: '/agent-persona'
+      preLoaderRoute: typeof appAgentPersonaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/(app)/profile/': {
       id: '/(app)/profile/'
       path: '/'
       fullPath: '/profile/'
       preLoaderRoute: typeof appProfileIndexRouteImport
       parentRoute: typeof appProfileRoute
+    }
+    '/(app)/agents/': {
+      id: '/(app)/agents/'
+      path: '/'
+      fullPath: '/agents/'
+      preLoaderRoute: typeof appAgentsIndexRouteImport
+      parentRoute: typeof appAgentsRoute
+    }
+    '/(auth)/auth/success': {
+      id: '/(auth)/auth/success'
+      path: '/auth/success'
+      fullPath: '/auth/success'
+      preLoaderRoute: typeof authAuthSuccessRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/(app)/profile/edit': {
       id: '/(app)/profile/edit'
@@ -248,8 +357,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appChatChatIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(app)/agents/$encounterId': {
+      id: '/(app)/agents/$encounterId'
+      path: '/$encounterId'
+      fullPath: '/agents/$encounterId'
+      preLoaderRoute: typeof appAgentsEncounterIdRouteImport
+      parentRoute: typeof appAgentsRoute
+    }
   }
 }
+
+interface appAgentsRouteChildren {
+  appAgentsEncounterIdRoute: typeof appAgentsEncounterIdRoute
+  appAgentsIndexRoute: typeof appAgentsIndexRoute
+}
+
+const appAgentsRouteChildren: appAgentsRouteChildren = {
+  appAgentsEncounterIdRoute: appAgentsEncounterIdRoute,
+  appAgentsIndexRoute: appAgentsIndexRoute,
+}
+
+const appAgentsRouteWithChildren = appAgentsRoute._addFileChildren(
+  appAgentsRouteChildren,
+)
 
 interface appProfileRouteChildren {
   appProfileEditRoute: typeof appProfileEditRoute
@@ -267,6 +397,9 @@ const appProfileRouteWithChildren = appProfileRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  UiKitRoute: UiKitRoute,
+  appAgentPersonaRoute: appAgentPersonaRoute,
+  appAgentsRoute: appAgentsRouteWithChildren,
   appChatsRoute: appChatsRoute,
   appFeedRoute: appFeedRoute,
   appMatchesRoute: appMatchesRoute,
@@ -275,6 +408,7 @@ const rootRouteChildren: RootRouteChildren = {
   authLoginRoute: authLoginRoute,
   authSignupRoute: authSignupRoute,
   appChatChatIdRoute: appChatChatIdRoute,
+  authAuthSuccessRoute: authAuthSuccessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

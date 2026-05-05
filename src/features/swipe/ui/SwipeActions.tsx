@@ -1,5 +1,5 @@
 import { SwipeDirection } from "@/features/swipe/model/types";
-import { Button } from "@/shared/ui/atoms/button/Button";
+import { Button } from "@/modules/ui-kit";
 
 import styles from "./SwipeActions.module.css";
 

@@ -3,14 +3,16 @@
   top: 0;
   z-index: 10;
   border-bottom: 1px solid var(--border);
-  background: rgba(17, 24, 39, 0.7);
-  backdrop-filter: blur(10px);
+  background: color-mix(in srgb, var(--panel) 82%, transparent);
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-sm);
 }
 
 .inner {
-  max-width: 960px;
+  max-width: 1120px;
   margin: 0 auto;
   padding: 14px 16px;
+  padding-top: max(14px, env(safe-area-inset-top));
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -18,39 +20,69 @@
 }
 
 .title {
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.2px;
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
   color: var(--text);
+  text-align: center;
 }
 
 .right {
-  color: var(--muted);
-  font-size: 12px;
-  min-width: 32px;
+  display: flex;
+  justify-content: flex-end;
+  min-width: 140px;
 }
 
 .backBtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  background: none;
-  border: none;
+  width: 40px;
+  height: 40px;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
   color: var(--text);
   cursor: pointer;
-  border-radius: 8px;
-  transition: background 0.15s;
+  border-radius: var(--radius-12);
+  transition:
+    background 120ms ease,
+    border-color 120ms ease,
+    transform 120ms ease;
   padding: 0;
   flex-shrink: 0;
 }
 
 .backBtn:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--panel-elevated);
+  border-color: var(--border-strong);
+}
+
+.backBtn:active {
+  transform: translateY(1px);
+}
+
+.backBtn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus) var(--accent-soft);
 }
 
 .backPlaceholder {
-  width: 32px;
+  width: 40px;
   flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .inner {
+    padding: 12px;
+    padding-top: max(12px, env(safe-area-inset-top));
+  }
+
+  .title {
+    font-size: var(--font-size-16);
+  }
+
+  .right {
+    min-width: auto;
+  }
 }

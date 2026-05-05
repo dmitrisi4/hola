@@ -1,98 +1,27 @@
+import { useNavigate } from '@tanstack/react-router'
 import { useRef, useState } from 'react'
 
-import { useNavigate } from '@tanstack/react-router'
-
 import { AppShell } from '@/app/layout/AppShell'
+import {
+  LIFESTYLE_LABELS,
+  LIFESTYLE_OPTIONS,
+  type LifestyleKey,
+  type LocalProfile,
+  LOOKING_FOR_OPTIONS,
+  readLocalProfile,
+  writeLocalProfile,
+} from '@/entities/profile/model/localProfile'
+import { Button, ChoicePills, SectionBlock } from "@/modules/ui-kit"
 
 import styles from './ProfileEditPage.module.css'
 
-/* ─── Local types ─────────────────────────────────────── */
-type LookingFor = 'relationship' | 'something-casual' | 'new-friends' | 'not-sure'
-
-interface ProfileState {
-  displayName: string
-  age: string
-  bio: string
-  location: string
-  height: string
-  lookingFor: LookingFor | ''
-  workout: string
-  smoking: string
-  drinking: string
-  kids: string
-}
-
-/* ─── Option maps ─────────────────────────────────────── */
-const LOOKING_FOR_OPTIONS: { value: LookingFor; label: string }[] = [
-  { value: 'relationship', label: 'Long-term relationship' },
-  { value: 'something-casual', label: 'Something casual' },
-  { value: 'new-friends', label: 'New friends' },
-  { value: 'not-sure', label: 'Still figuring it out' },
-]
-
-const LIFESTYLE_OPTIONS: Record<string, string[]> = {
-  workout: ['Every day', 'Often', 'Sometimes', 'Never'],
-  smoking: ['Non-smoker', 'Sometimes', 'Smoker'],
-  drinking: ['Never', 'Rarely', 'Socially', 'Frequently'],
-  kids: ["Want someday", "Don't want", 'Have & want more', 'Have & done', 'Not sure'],
-}
-
-const LIFESTYLE_LABELS: Record<string, string> = {
-  workout: 'Workout',
-  smoking: 'Smoking',
-  drinking: 'Drinking',
-  kids: 'Kids',
-}
-
-/* ─── Subcomponents ───────────────────────────────────── */
-function SectionTitle({ children }: { children: React.ReactNode }) {
-  return <h3 className={styles.sectionTitle}>{children}</h3>
-}
-
-/* ─── Main page ───────────────────────────────────────── */
 export function ProfileEditPage() {
   const navigate = useNavigate()
-  const [profile, setProfile] = useState<ProfileState>({
-    displayName: 'Alex',
-    age: '27',
-    bio: 'Frontend dev, love coffee and longboarding. Looking for people to explore new cities with.',
-    location: 'New York, NY',
-    height: '181 cm',
-    lookingFor: 'relationship',
-    workout: 'Often',
-    smoking: 'Non-smoker',
-    drinking: 'Socially',
-    kids: 'Want someday',
-  })
-
-  const [photos, setPhotos] = useState<(string | null)[]>([
-    'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?w=800&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop',
-    null,
-    null,
-    null,
-    null,
-  ])
+  const [profile, setProfile] = useState<LocalProfile>(() => readLocalProfile())
   const [hoveredSlot, setHoveredSlot] = useState<number | null>(null)
-
-  const makePrimary = (index: number) => {
-    setPhotos(prev => {
-      const next = [...prev]
-      const [main] = next.splice(index + 1, 1)
-      next.unshift(main)
-      return next
-    })
-  }
-
-  const removePhoto = (index: number) => {
-    setPhotos(prev => {
-      const next = [...prev]
-      next.splice(index + 1, 1)
-      next.push(null)
-      return next
-    })
-  }
-
+  const [editingField, setEditingField] = useState<string | null>(null)
+  const [tempValue, setTempValue] = useState('')
+  const [isSaved, setIsSaved] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [pendingSlot, setPendingSlot] = useState<number | null>(null)
 
@@ -104,38 +33,72 @@ export function ProfileEditPage() {
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file || pendingSlot === null) return
+
     const url = URL.createObjectURL(file)
-    setPhotos(prev => {
-      const next = [...prev]
-      next[pendingSlot + 1] = url
-      return next
+    setProfile((prev) => {
+      const photos = [...prev.photos]
+      if (pendingSlot === -1) {
+        photos[0] = url
+      } else {
+        photos[pendingSlot + 1] = url
+      }
+      return { ...prev, photos }
     })
     setPendingSlot(null)
+    setIsSaved(false)
     e.target.value = ''
   }
 
-  const [editingField, setEditingField] = useState<string | null>(null)
-  const [tempValue, setTempValue] = useState('')
+  const makePrimary = (index: number) => {
+    setProfile((prev) => {
+      const photos = [...prev.photos]
+      const [main] = photos.splice(index + 1, 1)
+      photos.unshift(main)
+      return { ...prev, photos }
+    })
+    setIsSaved(false)
+  }
+
+  const removePhoto = (index: number) => {
+    setProfile((prev) => {
+      const photos = [...prev.photos]
+      photos.splice(index + 1, 1)
+      photos.push(null)
+      return { ...prev, photos }
+    })
+    setIsSaved(false)
+  }
 
   const startEdit = (field: string, value: string) => {
     setEditingField(field)
     setTempValue(value)
   }
 
-  const commitEdit = (field: keyof ProfileState) => {
-    setProfile(prev => ({ ...prev, [field]: tempValue }))
+  const commitEdit = (field: keyof LocalProfile) => {
+    setProfile((prev) => ({ ...prev, [field]: tempValue }))
     setEditingField(null)
+    setIsSaved(false)
   }
 
-  const setLifestyle = (field: keyof ProfileState, value: string) => {
-    setProfile(prev => ({ ...prev, [field]: value }))
+  const setLifestyle = (field: LifestyleKey, value: string) => {
+    setProfile((prev) => ({ ...prev, [field]: value }))
+    setIsSaved(false)
+  }
+
+  const saveProfile = () => {
+    writeLocalProfile(profile)
+    setEditingField(null)
+    setIsSaved(true)
+  }
+
+  const saveAndGoBack = () => {
+    writeLocalProfile(profile)
+    void navigate({ to: '/profile' })
   }
 
   return (
     <AppShell title="EDIT PROFILE" scrollable onBack={() => navigate({ to: '/profile' })}>
       <div className={styles.page}>
-
-        {/* Hidden file input */}
         <input
           ref={fileInputRef}
           type="file"
@@ -144,53 +107,47 @@ export function ProfileEditPage() {
           onChange={onFileChange}
         />
 
-        {/* ── Photo grid ── */}
         <div className={styles.photoGrid}>
-          {/* Main photo */}
           <div className={styles.photoMain}>
-            {photos[0] && <img src={photos[0]} alt="Profile" className={styles.photo} />}
-            <button className={styles.photoEditBtn} aria-label="Change photo">
+            {profile.photos[0] ? <img src={profile.photos[0]} alt="Profile" className={styles.photo} /> : null}
+            <button type="button" className={styles.photoEditBtn} aria-label="Change photo" onClick={() => openFilePicker(-1)}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
               </svg>
             </button>
           </div>
 
-          {/* Secondary photos (index 1–5 in state → slots 0–4) */}
-          {photos.slice(1).map((src, i) => (
+          {profile.photos.slice(1).map((src, index) => (
             <div
-              key={i}
+              key={index}
               className={`${styles.photoSlot} ${!src ? styles.photoSlotEmpty : ''}`}
-              onMouseEnter={() => src ? setHoveredSlot(i) : undefined}
+              onMouseEnter={() => (src ? setHoveredSlot(index) : undefined)}
               onMouseLeave={() => setHoveredSlot(null)}
-              onClick={() => !src ? openFilePicker(i) : undefined}
+              onClick={() => (!src ? openFilePicker(index) : undefined)}
             >
               {src ? (
                 <>
                   <img src={src} alt="" className={styles.photo} />
-                  {hoveredSlot === i && (
+                  {hoveredSlot === index ? (
                     <div className={styles.photoOverlay}>
-                      <button
-                        className={styles.overlayBtn}
-                        onClick={() => makePrimary(i)}
-                        title="Make primary"
-                      >
+                      <button type="button" className={styles.overlayBtn} onClick={() => makePrimary(index)} title="Make primary">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                         </svg>
                         Main
                       </button>
                       <button
+                        type="button"
                         className={`${styles.overlayBtn} ${styles.overlayBtnDanger}`}
-                        onClick={() => removePhoto(i)}
+                        onClick={() => removePhoto(index)}
                         title="Delete"
                       >
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                          <path d="M18 6L6 18M6 6l12 12"/>
+                          <path d="M18 6L6 18M6 6l12 12" />
                         </svg>
                       </button>
                     </div>
-                  )}
+                  ) : null}
                 </>
               ) : (
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -201,161 +158,190 @@ export function ProfileEditPage() {
           ))}
         </div>
 
-        {/* ── About ── */}
-        <section className={styles.section}>
-          <SectionTitle>About me</SectionTitle>
-
-          {/* Name */}
-          <div className={styles.field}>
-            <span className={styles.fieldLabel}>Name</span>
-            {editingField === 'displayName' ? (
-              <div className={styles.fieldEdit}>
-                <input
-                  className={styles.fieldInput}
-                  value={tempValue}
-                  onChange={e => setTempValue(e.target.value)}
-                  autoFocus
-                />
-                <button className={styles.fieldSave} onClick={() => commitEdit('displayName')}>Save</button>
-              </div>
-            ) : (
-              <button className={styles.fieldValue} onClick={() => startEdit('displayName', profile.displayName)}>
-                {profile.displayName}
-                <PenIcon />
-              </button>
-            )}
+        <SectionBlock title="About me">
+          <div className={styles.section}>
+          <EditableField
+            editingField={editingField}
+            field="displayName"
+            label="Name"
+            value={profile.displayName}
+            tempValue={tempValue}
+            onStartEdit={startEdit}
+            onTempValueChange={setTempValue}
+            onCommit={commitEdit}
+          />
+          <EditableField
+            editingField={editingField}
+            field="age"
+            label="Age"
+            value={profile.age}
+            tempValue={tempValue}
+            inputType="number"
+            onStartEdit={startEdit}
+            onTempValueChange={setTempValue}
+            onCommit={commitEdit}
+          />
+          <EditableField
+            editingField={editingField}
+            field="location"
+            label="Location"
+            value={profile.location}
+            tempValue={tempValue}
+            onStartEdit={startEdit}
+            onTempValueChange={setTempValue}
+            onCommit={commitEdit}
+          />
+          <EditableField
+            editingField={editingField}
+            field="height"
+            label="Height"
+            value={profile.height || 'Add height'}
+            rawValue={profile.height}
+            tempValue={tempValue}
+            placeholder="e.g. 181 cm"
+            onStartEdit={startEdit}
+            onTempValueChange={setTempValue}
+            onCommit={commitEdit}
+          />
+          <EditableField
+            editingField={editingField}
+            field="bio"
+            label="Bio"
+            value={profile.bio || 'Write something about yourself…'}
+            rawValue={profile.bio}
+            tempValue={tempValue}
+            multiline
+            onStartEdit={startEdit}
+            onTempValueChange={setTempValue}
+            onCommit={commitEdit}
+          />
           </div>
+        </SectionBlock>
 
-          {/* Age */}
-          <div className={styles.field}>
-            <span className={styles.fieldLabel}>Age</span>
-            {editingField === 'age' ? (
-              <div className={styles.fieldEdit}>
-                <input
-                  className={styles.fieldInput}
-                  type="number"
-                  min={18}
-                  max={99}
-                  value={tempValue}
-                  onChange={e => setTempValue(e.target.value)}
-                  autoFocus
-                />
-                <button className={styles.fieldSave} onClick={() => commitEdit('age')}>Save</button>
-              </div>
-            ) : (
-              <button className={styles.fieldValue} onClick={() => startEdit('age', profile.age)}>
-                {profile.age}
-                <PenIcon />
-              </button>
-            )}
+        <SectionBlock title="Looking for">
+          <div className={styles.section}>
+          <ChoicePills
+            value={profile.lookingFor}
+            onChange={(value) => {
+              setProfile((prev) => ({ ...prev, lookingFor: value }))
+              setIsSaved(false)
+            }}
+            options={LOOKING_FOR_OPTIONS.map((option) => ({ value: option.value, label: option.label }))}
+          />
           </div>
+        </SectionBlock>
 
-          {/* Location */}
-          <div className={styles.field}>
-            <span className={styles.fieldLabel}>Location</span>
-            {editingField === 'location' ? (
-              <div className={styles.fieldEdit}>
-                <input
-                  className={styles.fieldInput}
-                  value={tempValue}
-                  onChange={e => setTempValue(e.target.value)}
-                  autoFocus
-                />
-                <button className={styles.fieldSave} onClick={() => commitEdit('location')}>Save</button>
-              </div>
-            ) : (
-              <button className={styles.fieldValue} onClick={() => startEdit('location', profile.location)}>
-                {profile.location}
-                <PenIcon />
-              </button>
-            )}
-          </div>
-
-          {/* Height */}
-          <div className={styles.field}>
-            <span className={styles.fieldLabel}>Height</span>
-            {editingField === 'height' ? (
-              <div className={styles.fieldEdit}>
-                <input
-                  className={styles.fieldInput}
-                  value={tempValue}
-                  onChange={e => setTempValue(e.target.value)}
-                  autoFocus
-                  placeholder="e.g. 181 cm"
-                />
-                <button className={styles.fieldSave} onClick={() => commitEdit('height')}>Save</button>
-              </div>
-            ) : (
-              <button className={styles.fieldValue} onClick={() => startEdit('height', profile.height)}>
-                {profile.height || 'Add height'}
-                <PenIcon />
-              </button>
-            )}
-          </div>
-
-          {/* Bio */}
-          <div className={`${styles.field} ${styles.fieldColumn}`}>
-            <span className={styles.fieldLabel}>Bio</span>
-            {editingField === 'bio' ? (
-              <div className={styles.fieldEdit}>
-                <textarea
-                  className={`${styles.fieldInput} ${styles.fieldTextarea}`}
-                  value={tempValue}
-                  onChange={e => setTempValue(e.target.value)}
-                  autoFocus
-                  rows={3}
-                />
-                <button className={styles.fieldSave} onClick={() => commitEdit('bio')}>Save</button>
-              </div>
-            ) : (
-              <button className={`${styles.fieldValue} ${styles.fieldValueBio}`} onClick={() => startEdit('bio', profile.bio)}>
-                <span>{profile.bio || 'Write something about yourself…'}</span>
-                <PenIcon />
-              </button>
-            )}
-          </div>
-        </section>
-
-        {/* ── Looking for ── */}
-        <section className={styles.section}>
-          <SectionTitle>Looking for</SectionTitle>
-          <div className={styles.chipGrid}>
-            {LOOKING_FOR_OPTIONS.map(opt => (
-              <button
-                key={opt.value}
-                className={`${styles.chip} ${profile.lookingFor === opt.value ? styles.chipActive : ''}`}
-                onClick={() => setProfile(p => ({ ...p, lookingFor: opt.value }))}
-              >
-                {opt.label}
-              </button>
-            ))}
-          </div>
-        </section>
-
-        {/* ── Lifestyle ── */}
-        <section className={styles.section}>
-          <SectionTitle>Lifestyle</SectionTitle>
+        <SectionBlock title="Lifestyle">
+          <div className={styles.section}>
           {Object.entries(LIFESTYLE_OPTIONS).map(([field, options]) => (
             <div key={field} className={styles.lifestyleRow}>
-              <span className={styles.lifestyleLabel}>{LIFESTYLE_LABELS[field]}</span>
-              <div className={styles.lifestyleChips}>
-                {options.map(opt => (
-                  <button
-                    key={opt}
-                    className={`${styles.chipSm} ${profile[field as keyof ProfileState] === opt ? styles.chipActive : ''}`}
-                    onClick={() => setLifestyle(field as keyof ProfileState, opt)}
-                  >
-                    {opt}
-                  </button>
-                ))}
-              </div>
+              <span className={styles.lifestyleLabel}>{LIFESTYLE_LABELS[field as LifestyleKey]}</span>
+              <ChoicePills
+                value={profile[field as LifestyleKey]}
+                onChange={(value) => setLifestyle(field as LifestyleKey, value)}
+                options={options.map((option) => ({ value: option, label: option }))}
+                size="sm"
+                className={styles.lifestyleChips}
+              />
             </div>
           ))}
-        </section>
+          </div>
+        </SectionBlock>
+
+        <SectionBlock
+          title="Save changes"
+          description="Changes are stored locally on this device until the backend profile flow is wired."
+          tone="emotion"
+          className={styles.actionsSection}
+        >
+          <div className={styles.actions}>
+            <Button type="button" onClick={saveProfile}>
+              {isSaved ? 'Saved' : 'Save draft'}
+            </Button>
+            <Button type="button" variant="primary" onClick={saveAndGoBack}>
+              Save and return
+            </Button>
+          </div>
+          <p className={styles.statusMessage} role="status" aria-live="polite">
+            {isSaved ? 'Profile changes saved locally.' : ''}
+          </p>
+        </SectionBlock>
 
         <div className={styles.bottomPad} />
       </div>
     </AppShell>
+  )
+}
+
+function EditableField({
+  editingField,
+  field,
+  label,
+  value,
+  rawValue,
+  tempValue,
+  placeholder,
+  inputType = 'text',
+  multiline = false,
+  onStartEdit,
+  onTempValueChange,
+  onCommit,
+}: {
+  editingField: string | null
+  field: keyof LocalProfile
+  label: string
+  value: string
+  rawValue?: string
+  tempValue: string
+  placeholder?: string
+  inputType?: React.HTMLInputTypeAttribute
+  multiline?: boolean
+  onStartEdit: (field: string, value: string) => void
+  onTempValueChange: (value: string) => void
+  onCommit: (field: keyof LocalProfile) => void
+}) {
+  const isEditing = editingField === field
+
+  return (
+    <div className={`${styles.field} ${multiline ? styles.fieldColumn : ''}`}>
+      <span className={styles.fieldLabel}>{label}</span>
+      {isEditing ? (
+        <div className={styles.fieldEdit}>
+          {multiline ? (
+            <textarea
+              className={`${styles.fieldInput} ${styles.fieldTextarea}`}
+              value={tempValue}
+              onChange={(event) => onTempValueChange(event.target.value)}
+              autoFocus
+              rows={3}
+            />
+          ) : (
+            <input
+              className={styles.fieldInput}
+              value={tempValue}
+              onChange={(event) => onTempValueChange(event.target.value)}
+              autoFocus
+              type={inputType}
+              min={inputType === 'number' ? 18 : undefined}
+              max={inputType === 'number' ? 99 : undefined}
+              placeholder={placeholder}
+            />
+          )}
+          <button type="button" className={styles.fieldSave} onClick={() => onCommit(field)}>
+            Save
+          </button>
+        </div>
+      ) : (
+        <button
+          type="button"
+          className={`${styles.fieldValue} ${multiline ? styles.fieldValueBio : ''}`}
+          onClick={() => onStartEdit(field, rawValue ?? value)}
+        >
+          <span>{value}</span>
+          <PenIcon />
+        </button>
+      )}
+    </div>
   )
 }
 
